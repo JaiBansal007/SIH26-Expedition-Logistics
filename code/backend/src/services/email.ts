@@ -1,31 +1,26 @@
 import nodemailer from 'nodemailer';
-import { drizzle } from "drizzle-orm/mysql2";
 import { eq, and } from "drizzle-orm";
 import { alarm_email, alarm, alarm_alert } from "../db/schema";
+import { db } from "../db/connection";
 
-const db = drizzle(process.env.DATABASE_URL!);
-
-// Email configuration from environment variables
 const EMAIL_CONFIG = {
-  host: process.env.EMAIL_HOST!,
-  port: parseInt(process.env.EMAIL_PORT!),
-  secure: process.env.EMAIL_SECURE === 'true', // true for 465, false for other ports
-  user: process.env.EMAIL_USER! || '',
-  password: process.env.EMAIL_PASSWORD! || '',
-  from: process.env.EMAIL_USER! || '',
+  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.EMAIL_PORT || '587'),
+  secure: process.env.EMAIL_SECURE === 'true', 
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS,
+  from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
 };
 
-// Create reusable transporter object using SMTP transport
 const transporter = nodemailer.createTransport({
   host: EMAIL_CONFIG.host,
   port: EMAIL_CONFIG.port,
   secure: EMAIL_CONFIG.secure,
   auth: {
     user: EMAIL_CONFIG.user,
-    pass: EMAIL_CONFIG.password,
+    pass: EMAIL_CONFIG.pass,
   },
 });
-
 // Verify connection configuration
 transporter.verify(function (error, success) {
   if (error) {

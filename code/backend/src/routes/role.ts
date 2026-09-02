@@ -17,17 +17,17 @@ RoleRouter.get('/roles', async(req,res)=>{
     }
 } );
 // GET role by ID
-RoleRouter.get('/role/:id', getRoleById as RequestHandler);
+RoleRouter.get('/role/:id', getRoleById as any as RequestHandler);
 
 // POST create new role
-RoleRouter.post('/role', createRole as RequestHandler);
+RoleRouter.post('/role', createRole as any as RequestHandler);
 
 // PUT update existing role
-RoleRouter.put('/role',updateRole as RequestHandler);
+RoleRouter.put('/role',updateRole as any as RequestHandler);
 
-RoleRouter.delete('/role/:id', deleteRole as RequestHandler);
+RoleRouter.delete('/role/:id', deleteRole as any as RequestHandler);
 
 // GET roles by user ID
-RoleRouter.get('/roles/user/:userId', getRolesByUserId as RequestHandler);
+RoleRouter.get('/roles/user/:userId', getRolesByUserId as any as RequestHandler);
 
 export default RoleRouter;

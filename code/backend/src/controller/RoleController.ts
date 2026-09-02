@@ -1,59 +1,52 @@
 import { Request, Response } from 'express';
-import { drizzle } from "drizzle-orm/mysql2";
 import { report, role, role_report, role_tabs, tabs } from '../db/schema';
 import { eq, sql } from 'drizzle-orm';
+import { db } from "../db/connection";
 
-const db = drizzle(process.env.DATABASE_URL!);
-
-//working
-export async function getAllRoles(){
+// working
+export const getAllRoles = async () => {
   try {
-
     const roles = await db.select().from(role);
-
-    const data=[];
+    const data = [];
     for (const r of roles) {
+      const rawdata = {
+        id: r.id,
+        role_name: r.role_name,
+        created_at: r.created_at,
+        updated_at: r.updated_at,
+        tabs_access: [] as { [key: string]: number }[],
+        report_access: [] as string[]
+      };
 
-      const rawdata={
-      id: r.id,
-      role_name: r.role_name,
-      created_at: r.created_at,
-      updated_at: r.updated_at,
-      tabs_access: [] as { [key: string]: number }[],
-      report_access: [] as string[]
-    }
-       const d=await db.select().from(role_tabs).where(eq(role_tabs.role_id, r.id));
-      //  const tabsAccess = {};
+      const d = await db.select().from(role_tabs).where(eq(role_tabs.role_id, r.id));
 
-      for(const item of d){
+      for (const item of d) {
         console.log(item);
         if (item.tab_id !== null && item.tab_id !== undefined) {
           const tabData = await db.select().from(tabs).where(eq(tabs.id, item.tab_id));
           console.log(tabData);
-         rawdata.tabs_access.push({
+          rawdata.tabs_access.push({
             [tabData[0].tab_name]: (item.status ? 2 : 1)
           });
         }
       }
 
-      const dd=await db.select().from(role_report).where(eq(role_report.role_id, r.id));
+      const dd = await db.select().from(role_report).where(eq(role_report.role_id, r.id));
 
-      for(const item of dd){
+      for (const item of dd) {
         if (item.report_id !== null && item.report_id !== undefined) {
           const reportData = await db.select().from(report).where(eq(report.id, item.report_id));
           if (reportData.length > 0) {
             rawdata.report_access.push(reportData[0].report_name);
           }
         }
-      }    
-      // console.log(rawdata);
-      data.push(rawdata);   
+      }
+      data.push(rawdata);
     }
-    // console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching roles:', error);
-
+    throw error;
   }
 };
 

@@ -1,23 +1,25 @@
-import { drizzle } from "drizzle-orm/mysql2";
 import { eq , and, sql ,  } from "drizzle-orm";
+import { db } from "../db/connection";
 // import { alarm } from "../db/schema";
 import { gps_schema , alarm , entity , group , group_entity , alarm_alert , alarm_customer_group , alarm_email , alarm_geofence_group , alarm_group , alert , alert_shipment_relation , geofence_group_relation , geofence_table ,  stop , equipment} from "../db/schema";
 import { sendAlertEmail } from "../services/email";
 
-const db = drizzle(process.env.DATABASE_URL!);
-// Process geofence alerts
 export async function processGeofenceAlerts() {
   try {
-    // Get all geofence alarms
+    // Get all active geofence alarms
     const geofenceAlarms = await db
       .select()
       .from(alarm)
       .where(
         and(
-          eq(alarm.alarm_category, "Geofence"),
+          eq(alarm.alarm_type_id, 4),
           eq(alarm.alarm_status, true)
         )
       );
+
+    if (geofenceAlarms.length === 0) {
+      return { success: true, message: "No geofence alarms configured" };
+    }
     
     for (const alarmConfig of geofenceAlarms) {
       // Get geofence status from alarm configuration (1 for entry, 2 for exit)
@@ -387,15 +389,13 @@ async function getGeofencePolygonCoordinates(geofenceId: number): Promise<Array<
   try {
     // Assuming you have a geofence_coordinates table that stores polygon points
     // You'll need to adjust this based on your actual schema
-    const coordinates = await db
+    const coordinates: any = await (db
       .select({
         latitude: sql<number>`latitude`,
         longitude: sql<number>`longitude`,
         sequence: sql<number>`sequence`
       })
-      .from(sql`geofence_coordinates`) // Replace with your actual table name
-      .where(sql`geofence_id = ${geofenceId}`)
-      .orderBy(sql`sequence ASC`);
+      .from(sql`geofence_coordinates` as any) as any);
     
     return coordinates.map(coord => ({
       lat: coord.latitude,

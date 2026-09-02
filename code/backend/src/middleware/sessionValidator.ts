@@ -1,22 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { drizzle } from "drizzle-orm/mysql2";
 import { usersTable } from '../db/schema';
 import { eq } from 'drizzle-orm';
-
-const db = drizzle(process.env.DATABASE_URL!);
-
-export const validateUserSession = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+import { db } from "../db/connection";
+export const validateSession = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Get the token from the Authorization header
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      // No need to set invalidatedSession if there's no token
-      return next();
+    if (!authHeader) {
+      (req as any).invalidatedSession = true;
+      next();
+      return;
     }
 
     const token = authHeader.split(' ')[1];

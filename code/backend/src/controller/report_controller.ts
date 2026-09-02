@@ -1,4 +1,5 @@
 import { eq, and, gte, lte, desc, sql, inArray, lt, asc } from 'drizzle-orm';
+import { db } from "../db/connection";
 import {
   gps_schema,
   entity,
@@ -8,28 +9,11 @@ import {
   vendor,
   entity_vendor
 } from '../db/schema';
-import { drizzle } from 'drizzle-orm/mysql2';
 import { reverseGeocode } from '../utilities/geofunc'
 import { formatDate } from '../utilities/geofunc';
-
-const db = drizzle(process.env.DATABASE_URL!);
-
-function getIgnitionStatus(digitalInput1?: number, digitalInput2?: number, digitalInput3?: number): 'ON' | 'OFF' {
-  // Adjust this logic based on your GPS device configuration
-  // Usually ignition status is in digitalInput1 or digitalInput2
-  if (digitalInput1 === 1 || digitalInput2 === 1 || digitalInput3 === 1) {
-    return 'ON';
-  }
-  return 'OFF';
-}
-
-export async function getDashboardReport(
-  vehicleGroups: number[],
-  tripStatus: 'active' | 'inactive' | 'all'
-) {
+export async function getDashboardReport(vehicleGroups: number[], tripStatus: string = 'all') {
   try {
-    // Get all vehicles from specified groups (remove vehicleStatus and groupName from select)
-    const vehicleGroupQuery = db
+    let vehicleGroupQuery = db
       .select({
         vehicleId: entity.id,
         vehicleNumber: entity.vehicleNumber,

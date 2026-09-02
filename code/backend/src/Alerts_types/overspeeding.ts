@@ -1,13 +1,12 @@
-import { drizzle } from "drizzle-orm/mysql2";
 import { eq , and, sql ,  } from "drizzle-orm";
+import { db } from "../db/connection";
 // import { alarm } from "../db/schema";
 import { gps_schema , alarm , entity , group , group_entity , alarm_alert , alarm_customer_group , alarm_email , alarm_geofence_group , alarm_group , alert , alert_shipment_relation , equipment } from "../db/schema";
 import { sendAlertEmail } from "../services/email";
-const db = drizzle(process.env.DATABASE_URL!);
-
+    
 export async function processOverspeedingAlerts() {
   try {
-    // Get all overspeeding alarms
+    // Get all active overspeeding alarms
     const overspeedingAlarms = await db
       .select()
       .from(alarm)
@@ -17,6 +16,10 @@ export async function processOverspeedingAlerts() {
           eq(alarm.alarm_status, true)
         )
       );
+
+    if (overspeedingAlarms.length === 0) {
+      return { success: true, message: "No overspeeding alarms configured" };
+    }
     
     for (const alarmConfig of overspeedingAlarms) {
       // Get speed threshold from alarm configuration

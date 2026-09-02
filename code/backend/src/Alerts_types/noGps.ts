@@ -1,23 +1,25 @@
-import { drizzle } from "drizzle-orm/mysql2";
 import { eq , and, sql ,  gte} from "drizzle-orm";
+import { db } from "../db/connection";
 // import { alarm } from "../db/schema";
 import { gps_schema , alarm , entity , group , group_entity , alarm_alert , alarm_customer_group , alarm_email , alarm_geofence_group , alarm_group , alert , alert_shipment_relation , geofence_group_relation , geofence_table ,  stop , equipment} from "../db/schema";
 import { sendAlertEmail } from "../services/email";
 
-const db = drizzle(process.env.DATABASE_URL!);
-
 export async function processNoGPSFeedAlerts() {
   try {
-    // Get all no GPS feed alarms
+    // Get all active no GPS alarms
     const noGpsAlarms = await db
       .select()
       .from(alarm)
       .where(
         and(
-          eq(alarm.alarm_type_id, 4), 
+          eq(alarm.alarm_type_id, 6),
           eq(alarm.alarm_status, true)
         )
       );
+
+    if (noGpsAlarms.length === 0) {
+      return { success: true, message: "No GPS alarms configured" };
+    }
     
     for (const alarmConfig of noGpsAlarms) {
       // Get threshold in minutes from alarm configuration

@@ -1,8 +1,8 @@
-import { drizzle } from "drizzle-orm/mysql2";
 import {report, tabs, usertype, vendor, role, role_tabs, role_report, usersTable, user_role, user_usertype} from "../db/schema";
 import { eq, or, inArray } from "drizzle-orm";
 import { create } from "domain";
 import bcrypt from "bcrypt";
+import { db } from "../db/connection";
 const utype=['Driver','Customer','consignee','Consignor','Attendant','Admin'];
 
 const tb=["dashboard","trail","list_map","trip_dashboard","report","schedule_report","alarm","geofence_config","geofence_group","geofence_stats","user_reponsibility","user_access","entities","group","vendors","customer"]
@@ -26,32 +26,15 @@ const vendors = [
     'FLEETRIDER',
 ];
 
-const db=drizzle(process.env.DATABASE_URL!);
-interface CreateRoleBody {
-    role_name: string;
-    tabs_access: Array<Record<string, number>>;
-    report_access: string[];
-}
+type Role = any;
+type Tab = any;
+type Report = any;
 
-interface Tab {
-    id: number;
-    tab_name: string;
-}
-
-interface Report {
-    id: number;
-    report_name: string;
-}
-
-interface Role {
-    id: number;
-    role_name: string;
-}
-
-const createRole = async (body: CreateRoleBody): Promise<void> => {
+export const createRole = async (body: any) => {
     try {
         const { role_name, tabs_access, report_access } = body;
-        const check1: Role[] = await db.select().from(role).where(eq(role.role_name, role_name));
+        const check1 = await db.select().from(role).where(eq(role.role_name, role_name));
+
         if (check1.length > 0) {
             return;
         }
@@ -61,7 +44,7 @@ const createRole = async (body: CreateRoleBody): Promise<void> => {
         }).$returningId();
         const q: Role[] = await db.select().from(role).where(eq(role.id, roleid[0].id));
         for (const item of tabs_access) {
-            const [key, value]: [string, number] = Object.entries(item)[0];
+            const [key, value] = Object.entries(item)[0] as any;
             const d: Tab[] = await db.select().from(tabs).where(eq(tabs.tab_name, key));
             
             if (d.length > 0) {

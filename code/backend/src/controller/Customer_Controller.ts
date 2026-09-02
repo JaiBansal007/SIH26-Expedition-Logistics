@@ -1,24 +1,22 @@
 import { Request, Response } from 'express';
+import { db } from "../db/connection";
 // import { db } from '../db/connection';
-import { drizzle } from "drizzle-orm/mysql2";
 import { customer_lr_detail, customer_group, customer_group_relation, customers, user_customer_group , usersTable } from '../db/schema';
 import { eq, like, and, or, inArray, ne, sql } from 'drizzle-orm';
 
-const db=drizzle(process.env.DATABASE_URL!);
-
-// working
+//working
 export async function createCustomer(req: Request, res: Response) {
     try {
-        const { customer_id, customer_name, customer_location, lr_number, stop_id } = req.body;
-        
+        const { lr_number, customer_id, customer_name, customer_location, stop_id } = req.body;
+
         // Validate required fields
-        if (!customer_name || !customer_id) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Missing required fields. customer_name and customer_id are required' 
-            });
+        if (!customer_id || !customer_name) {
+            return {
+                success: false,
+                message: 'customer_id and customer_name are required'
+            };
         }
-        
+
         // First check if the customer already exists
         let customerRecord;
         

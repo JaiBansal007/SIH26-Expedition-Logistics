@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { db } from "../db/connection";
 import {
   alert,
   alarm,
@@ -21,35 +22,10 @@ import {
   alert_entity_relation,
 } from "../db/schema";
 import { eq, and, between, inArray, desc, sql, or } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
-
-const db = drizzle(process.env.DATABASE_URL!);
-
-interface AlarmReportRequest {
-  startDate: string;
-  endDate: string;
-  alarmTypes: number[]; // array of alarm_type_ids (1-7)
-  vehicleGroups?: number[]; // array of vehicle group IDs
-  customerGroups?: number[]; // array of customer group IDs
-}
 
 export const getAlarmReport = async (req: Request, res: Response) => {
   try {
-    const {
-      startDate,
-      endDate,
-      alarmTypes,
-      vehicleGroups,
-      customerGroups,
-    }: AlarmReportRequest = req.body;
-
-    // Validate required fields
-    if (!startDate || !endDate || !alarmTypes || alarmTypes.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "startDate, endDate, and alarmTypes are required",
-      });
-    }
+    const { startDate, endDate, alarmTypes, vehicleGroups, customerGroups } = req.body;
 
     console.log("Request params:", { startDate, endDate, alarmTypes, vehicleGroups, customerGroups });
 

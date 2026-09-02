@@ -10,7 +10,7 @@ import {
   getUserbyUsername,
   logoutUser,
 } from '../controller/UserController';
-import { validateUserSession } from '../middleware/sessionValidator';
+import { validateSession as validateUserSession } from '../middleware/sessionValidator';
 
 
 const userRouter = express.Router();
@@ -121,17 +121,8 @@ userRouter.delete('/user/:id', validateUserSession, async (req: Request, res: Re
 
 //working
 userRouter.post('/login', async (req, res) => {
-    //login user
-    const data = await loginUser(req, res);
-    if (data) {
-       if(data==10){
-         res.status(409).send({ message: 'User is Inactive' });
-       }else{
-         res.send({ message: 'User logged in successfully', data });
-       }
-    } else {
-        res.status(401).send({ message: 'Invalid credentials' });
-    }
+    // Controller handles the response directly
+    await loginUser(req, res);
 });
 
 // Add this endpoint to check user session validity

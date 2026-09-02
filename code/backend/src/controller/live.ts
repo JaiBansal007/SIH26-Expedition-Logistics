@@ -1,7 +1,7 @@
 import { shipment, equipment, gps_schema, entity, user_group, group_entity, group } from '../db/schema';
 import { eq, inArray, asc, desc, and, gte, lt } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
 import { formatDate } from '../utilities/geofunc';
+import { db } from "../db/connection";
 //import { reverseGeocode } from '../utilities/geofunc';
 import axios from "axios";
 
@@ -18,13 +18,8 @@ function haversine(lat1: number, lon1: number, lat2: number, lon2: number) {
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-const db = drizzle(process.env.DATABASE_URL!);
-
-export async function getLiveData(userid: any, groups: any[] = []): Promise<any> {
-    // 1. Get all group IDs for the user    
-    const userGroups = await db.select({ vehicle_group_id: user_group.vehicle_group_id })
-        .from(user_group)
-        .where(eq(user_group.user_id, userid));
+export async function getLiveData(userId: number, groups?: number[]) {
+    const userGroups = await db.select().from(user_group).where(eq(user_group.user_id, userId));
     const userGroupIds = userGroups.map(g => g.vehicle_group_id).filter(Boolean);
 
     // If groups is provided and not empty, use only those group IDs (but only if user has access)

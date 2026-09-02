@@ -1,5 +1,6 @@
 import { Trip } from "../types/trip";
 import { readTripXMLData } from "../utilities/xmlfunc";
+import { db } from "../db/connection";
 import {
   shipment,
   vendor,
@@ -26,16 +27,12 @@ import {
 } from "../db/schema";
 
 import { ne, eq, inArray, and, gte, lt, desc, sql } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
 import { formatDate, reverseGeocode, haversine } from "../utilities/geofunc";
 import bcrypt from "bcryptjs";
 import { start } from "repl";
 
-const db = drizzle(process.env.DATABASE_URL!);
-
-async function fetchallusercustomers(userId: number) {
+export async function fetchallusercustomers(userId: number) {
   try {
-    // Fetch all customer groups for the user
     const userCustomerGroups = await db
       .select({ customerGroupId: user_customer_group.customer_group_id })
       .from(user_customer_group)

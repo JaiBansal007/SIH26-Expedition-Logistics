@@ -1,36 +1,35 @@
 import { Request, Response } from 'express';
+import { db } from "../db/connection";
 
 import { user_geofence_group, geofence_group_relation, geofence_table, polygon_coordinates } from '../db/schema';
 import { eq, like, and, or, inArray, ne } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/mysql2';
-const db = drizzle(process.env.DATABASE_URL!);
 
-// CREATE
+// working
 export async function createGeoFence(req: Request, res: Response) {
     try {
-        const { 
-            geofence_name, 
-            latitude, 
-            longitude, 
-            location_id, 
-            tag, 
-            stop_type, 
-            geofence_type, 
+        const {
+            geofence_name,
+            latitude,
+            longitude,
+            location_id,
+            tag,
+            stop_type,
+            geofence_type,
             radius,
             polygon_points,
             status,
             address,
             time
         } = req.body;
-        
+
         // Validate required fields
-        if (!geofence_name || !location_id) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Missing required fields. geofence_name and location_id are required' 
+        if (!geofence_name || !location_id || latitude === undefined || longitude === undefined) {
+            return res.status(400).json({
+                success: false,
+                message: 'Missing required fields. geofence_name, location_id, latitude, and longitude are required'
             });
         }
-        
+
         // Validate geofence type specific requirements
         if (geofence_type === 0 && (!radius || radius <= 0)) {
             return res.status(400).json({
