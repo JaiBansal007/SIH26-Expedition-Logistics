@@ -72,8 +72,8 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                 <Radio size={18} className="text-ice-blue" />
               </div>
               <div className="hidden sm:block">
-                <span className="text-text-primary font-bold text-sm tracking-tight">MARG</span>
-                <span className="text-text-muted text-[10px] uppercase tracking-wider ml-2">Mission Control</span>
+                <span className="text-text-primary font-bold text-sm tracking-tight">POLARIS</span>
+                <span className="text-text-muted text-[10px] uppercase tracking-wider ml-2">NCPOR Mission Control</span>
               </div>
             </div>
 
