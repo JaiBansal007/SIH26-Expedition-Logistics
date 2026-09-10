@@ -1,5 +1,2 @@
 # Final Presentation
-
-[INSERT YOUR PRESENTATION LINK HERE]
-
-> Note: If your PPTX file is small enough (under 25MB), you can also upload the file directly to this folder.
+https://drive.google.com/file/d/1z5ecKWwOvAJnjdj3BrSHWJt1c0Q31vFt/view?usp=sharing
