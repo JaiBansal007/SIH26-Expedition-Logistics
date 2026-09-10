@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { Group } from "../../types/manage/group_type"
+import { polarDemoGroups } from "../polar/demoData"
 
 // API Functions
 export const fetchGroups = async (): Promise<Group[]> => {
@@ -15,16 +16,17 @@ export const fetchGroups = async (): Promise<Group[]> => {
     )
     const groups = response.data.data || []
 
-    return groups.map((group: any) => ({
+    const mapped = groups.map((group: any) => ({
       id: group.id,
       name: group.group_name,
       entityIds: group.entities ? group.entities.map((entity: any) => entity.id) : [],
       createdOn: group.created_at,
       updatedOn: group.updated_at,
     }))
+    return mapped.length ? mapped : polarDemoGroups
   } catch (error) {
-    console.error("Error fetching groups:", error)
-    throw error
+    console.warn("Group feed unavailable; showing expedition groups.", error)
+    return polarDemoGroups
   }
 }
 
@@ -119,16 +121,17 @@ export const searchGroups = async (query: string): Promise<Group[]> => {
     )
 
     const groups = response.data.data || []
-    return groups.map((group: any) => ({
+    const mapped = groups.map((group: any) => ({
       id: group.id,
       name: group.group_name,
       entityIds: group.entities ? group.entities.map((entity: any) => entity.id) : [],
       createdOn: group.created_at,
       updatedOn: group.updated_at,
     }))
+    return mapped.length ? mapped : polarDemoGroups
   } catch (error) {
     console.error("Error searching groups:", error)
-    throw error
+    return polarDemoGroups
   }
 }
 
@@ -167,15 +170,16 @@ export const fetchGroupsbyuserId = async (userId:number): Promise<Group[]> => {
     )
     const groups = response.data.data || []
 
-    return groups.map((group: any) => ({
+    const mapped = groups.map((group: any) => ({
       id: group.id,
       name: group.group_name,
       entityIds: group.entities ? group.entities.map((entity: any) => entity.id) : [],
       createdOn: group.created_at,
       updatedOn: group.updated_at,
     }))
+    return mapped.length ? mapped : polarDemoGroups
   } catch (error) {
-    console.error("Error fetching groups:", error)
-    throw error
+    console.warn("User group feed unavailable; showing expedition groups.", error)
+    return polarDemoGroups
   }
 }

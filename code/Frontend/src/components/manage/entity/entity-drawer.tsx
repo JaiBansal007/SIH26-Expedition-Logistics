@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast"
 export function EntityDrawer({ open, onClose, entity, onSave, availableVendors }: EntityDrawerProps) {
   const [vehicleNumber, setVehicleNumber] = useState(entity?.vehicleNumber || "")
   const [selectedVendors, setSelectedVendors] = useState<Vendor[]>(entity?.vendors || [])
-  const [type, setType] = useState<"Car" | "Truck" | "Excavator">(entity?.type || "Car")
+  const [type, setType] = useState<any>(entity?.type || "Snow Vehicle")
   const [status, setStatus] = useState<boolean>(entity?.status ?? true)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const { showSuccessToast, Toaster } = useToast({ position: "top-right" })
@@ -20,7 +20,7 @@ export function EntityDrawer({ open, onClose, entity, onSave, availableVendors }
     if (open) {
       setVehicleNumber(entity?.vehicleNumber || "")
       setSelectedVendors(entity?.vendors || [])
-      setType(entity?.type || "Car")
+      setType(entity?.type || "Snow Vehicle")
       setStatus(entity?.status ?? true)
       setErrors({})
     }
@@ -179,7 +179,7 @@ export function EntityDrawer({ open, onClose, entity, onSave, availableVendors }
                       <Label htmlFor="type" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Type
                       </Label>
-                      <Select value={type} onValueChange={(value: "Car" | "Truck" | "Excavator") => setType(value)}>
+                      <Select value={type} onValueChange={(value) => setType(value)}>
                         <SelectTrigger className="w-full dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
@@ -187,6 +187,10 @@ export function EntityDrawer({ open, onClose, entity, onSave, availableVendors }
                           <SelectItem value="Car" className="dark:text-gray-300">Car</SelectItem>
                           <SelectItem value="Truck" className="dark:text-gray-300">Truck</SelectItem>
                           <SelectItem value="Excavator" className="dark:text-gray-300">Excavator</SelectItem>
+                          <SelectItem value="Research Vessel" className="dark:text-gray-300">Research Vessel</SelectItem>
+                          <SelectItem value="Aircraft" className="dark:text-gray-300">Aircraft</SelectItem>
+                          <SelectItem value="Snow Vehicle" className="dark:text-gray-300">Snow Vehicle</SelectItem>
+                          <SelectItem value="Scientific Equipment" className="dark:text-gray-300">Scientific Equipment</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

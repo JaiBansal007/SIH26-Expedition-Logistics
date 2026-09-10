@@ -3,7 +3,7 @@ export interface Entity {
   id: number // Changed from string to number to match backend autoincrement
   vehicleNumber: string
   vendors: Vendor[] // Changed from string[] to Vendor[] to match backend response
-  type: "Car" | "Truck" | "Excavator"
+  type: "Car" | "Truck" | "Excavator" | "Research Vessel" | "Aircraft" | "Snow Vehicle" | "Scientific Equipment"
   status: boolean // Changed from "Active" | "Inactive" to boolean to match backend
   createdAt: string
   updatedAt: string

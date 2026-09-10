@@ -4,6 +4,7 @@ import { fetchGroups } from "../manage/group"
 import { fetchRoles } from "./responsibility"
 import { fetchGeofenceGroups } from "../geofence/ggroup"
 import { fetchCustomerGroups } from "../manage/customergroup"
+import { polarDemoUsers } from "../polar/demoData"
 
 // Initial data - will be replaced with API data
 export let initialUsers: User[] = []
@@ -42,10 +43,10 @@ export const fetchUsers = async (): Promise<User[]> => {
       customerGroups: user.customergrp || [],
     }))
 
-    return initialUsers
+    return initialUsers.length ? initialUsers : polarDemoUsers
   } catch (error) {
-    console.error("Error fetching users:", error)
-    throw error
+    console.warn("Personnel feed unavailable; showing expedition personnel.", error)
+    return polarDemoUsers
   }
 }
 

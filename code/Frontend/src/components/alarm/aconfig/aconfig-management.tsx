@@ -15,6 +15,7 @@ import {
   fetchGeofenceGroups,
   fetchCustomerGroups,
   fetchUsers,
+  mockAlarms,
 } from "../../../data/alarm/aconfig"
 import { fetchRolesByUserId } from "../../../data/usermanage/responsibility"
 import { useToast } from "@/hooks/use-toast"
@@ -74,6 +75,11 @@ const AlarmConfigPage = () => {
       setUsers(usersData || [])
     } catch (error) {
       console.error("Error fetching data:", error)
+      setAlarms(mockAlarms)
+      setVehicleGroups([])
+      setCustomerGroups([])
+      setGeofenceGroups([])
+      setUsers([])
       showErrorToast("Failed to load data", "Please try again later")
     } finally {
       setLoading(false)

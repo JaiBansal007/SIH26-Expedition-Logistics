@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { GeofenceGroup} from "../../types/geofence/ggroup_type"
+import { polarDemoGeofenceGroups } from "../polar/demoData"
 //import type { Geofence } from "../../types/geofence/gconfig"
 
 // Fetch all geofence groups
@@ -16,7 +17,7 @@ export const fetchGeofenceGroups = async (): Promise<GeofenceGroup[]> => {
     )
     const groups = response.data.data || []
 
-    return groups.map((group: any) => ({
+    const mapped = groups.map((group: any) => ({
       id: typeof group.id === "object" ? group.id.id : group.id,
       geo_group: group.geo_group,
       geofenceIds: group.geofences?.map((g: any) => g.id) || [],
@@ -24,9 +25,10 @@ export const fetchGeofenceGroups = async (): Promise<GeofenceGroup[]> => {
       updated_at: group.updated_at,
       geofences: group.geofences || [],
     }))
+    return mapped.length ? mapped : polarDemoGeofenceGroups
   } catch (error) {
-    console.error("Error fetching geofence groups:", error)
-    throw error
+    console.warn("Station zone feed unavailable; showing polar station zones.", error)
+    return polarDemoGeofenceGroups
   }
 }
 

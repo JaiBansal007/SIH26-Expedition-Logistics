@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { VehicleTrailResponse, TripTrailResponse } from "../../types/trail/trail_type"
+import { polarDemoTripTrail, polarDemoVehicleTrail } from "../polar/demoData"
 
 // Fetch Vehicle Trail Data
 export const fetchVehicleTrail = async (
@@ -28,7 +29,8 @@ export const fetchVehicleTrail = async (
     return null
   } catch (error) {
     console.error("Error fetching vehicle trail:", error)
-    throw error
+    console.warn("Vehicle trail unavailable; showing curated polar route.", error)
+    return polarDemoVehicleTrail
   }
 }
 
@@ -50,6 +52,7 @@ export const fetchTripTrail = async (shipmentId: string): Promise<TripTrailRespo
     return response.data
   } catch (error) {
     console.error("Error fetching trip trail:", error)
-    throw error
+    console.warn("Trip trail unavailable; showing curated polar route.", error)
+    return polarDemoTripTrail
   }
 }

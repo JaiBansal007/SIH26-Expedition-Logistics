@@ -26,6 +26,6 @@ export interface GroupTableProps {
 export interface Entity {
   id: number
   vehicleNumber: string
-  type: "Car" | "Truck" | "Excavator"
+  type: "Car" | "Truck" | "Excavator" | "Research Vessel" | "Aircraft" | "Snow Vehicle" | "Scientific Equipment"
   status: boolean
 }

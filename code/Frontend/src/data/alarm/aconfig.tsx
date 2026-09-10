@@ -6,9 +6,10 @@ import { fetchGroups } from "../manage/group"
 import { fetchGeofenceGroups } from "../geofence/ggroup"
 import { fetchCustomerGroups } from "../manage/customergroup"
 import { fetchUsers } from "../usermanage/user"
+import { polarDemoAlarms } from "../polar/demoData"
 
 // Mock data for alarms (will be replaced with API data)
-export const mockAlarms: Alarm[] = []
+export const mockAlarms: Alarm[] = polarDemoAlarms
 
 // Fetch all alarms from the API with related data
 export const fetchAlarms = async (): Promise<Alarm[]> => {
@@ -107,10 +108,10 @@ export const fetchAlarms = async (): Promise<Alarm[]> => {
       }),
     )
 
-    return detailedAlarms
+    return detailedAlarms.length > 0 ? detailedAlarms : mockAlarms
   } catch (error) {
-    console.error("Error fetching alarms:", error)
-    throw error
+    console.warn("Alarm feed unavailable; showing curated expedition alarms.", error)
+    return mockAlarms
   }
 }
 

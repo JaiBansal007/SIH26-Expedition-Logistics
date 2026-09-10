@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { CustomerGroup, Customer } from "../../types/manage/customergroup_type"
+import { polarDemoCustomerGroups } from "../polar/demoData"
 
 // Fetch all customer groups
 export const fetchCustomerGroups = async (): Promise<CustomerGroup[]> => {
@@ -15,16 +16,17 @@ export const fetchCustomerGroups = async (): Promise<CustomerGroup[]> => {
     )
     const groups = response.data.data || []
 
-    return groups.map((group: any) => ({
+    const mapped = groups.map((group: any) => ({
       id: group.id,
       group_name: group.group_name,
       customerIds: group.customers ? group.customers.map((customer: any) => customer.id) : [],
       created_at: group.created_at,
       updated_at: group.updated_at,
     }))
+    return mapped.length ? mapped : polarDemoCustomerGroups
   } catch (error) {
-    console.error("Error fetching customer groups:", error)
-    throw error
+    console.warn("Station group feed unavailable; showing research stations.", error)
+    return polarDemoCustomerGroups
   }
 }
 

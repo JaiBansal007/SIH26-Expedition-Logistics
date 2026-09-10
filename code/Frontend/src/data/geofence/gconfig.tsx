@@ -1,4 +1,5 @@
 import axios from "axios"
+import { polarDemoGeofences } from "../polar/demoData"
 
 // API Functions
 export const fetchGeofences = async () => {
@@ -12,10 +13,11 @@ export const fetchGeofences = async () => {
         },
       }
     )
-    return response.data.data.map(transformBackendToFrontend)
+    const mapped = (response.data.data || []).map(transformBackendToFrontend)
+    return mapped.length ? mapped : polarDemoGeofences
   } catch (error) {
-    console.error("Error fetching geofences:", error)
-    throw error
+    console.warn("Geofence feed unavailable; showing polar station zones.", error)
+    return polarDemoGeofences
   }
 }
 

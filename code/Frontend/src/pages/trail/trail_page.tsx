@@ -24,11 +24,12 @@ import SpeedChart from "@/components/trail/speed-chart"
 import { fetchVehicleTrail, fetchTripTrail } from "../../data/trail/traildata"
 import type { VehicleTrailResponse, TripTrailResponse } from "../../types/trail/trail_type"
 import type { TrailType } from "../../types/trail/trail_type"
+import { polarDemoTripTrail, polarDemoVehicleTrail } from "../../data/polar/demoData"
 
 const TrailMap = lazy(() => import("@/components/trail/trail-map"))
 
 export default function TrailPage() {
-  const [trailType, setTrailType] = useState<TrailType>("vehicle")
+  const [trailType, setTrailType] = useState<TrailType>("trip")
   const [dateRange, setDateRange] = useState<{
     from: Date | undefined
     to: Date | undefined
@@ -38,12 +39,12 @@ export default function TrailPage() {
   })
 
   // Search states
-  const [vehicleSearch, setVehicleSearch] = useState("")
-  const [shipmentSearch, setShipmentSearch] = useState("")
+  const [vehicleSearch, setVehicleSearch] = useState("SNOW-14")
+  const [shipmentSearch, setShipmentSearch] = useState("POL-46-124")
 
   // Data states
-  const [vehicleData, setVehicleData] = useState<VehicleTrailResponse | null>(null)
-  const [tripData, setTripData] = useState<TripTrailResponse | null>(null)
+  const [vehicleData, setVehicleData] = useState<VehicleTrailResponse | null>(polarDemoVehicleTrail)
+  const [tripData, setTripData] = useState<TripTrailResponse | null>(polarDemoTripTrail)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -276,7 +277,7 @@ export default function TrailPage() {
   }, [isFullscreen])
 
   return (
-    <div className={`flex h-162 bg-gray-50 dark:bg-gray-900 ${isFullscreen ? "fixed inset-0 z-50 bg-white dark:bg-gray-900" : ""}`}>
+    <div className={`flex h-[calc(100vh-3.5rem)] min-h-[680px] bg-gray-50 dark:bg-gray-900 ${isFullscreen ? "fixed inset-0 z-50 bg-white dark:bg-gray-900" : ""}`}>
       {/* Sidebar */}
       {!isFullscreen && (
         <motion.div

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import {  MapPin, Truck, Bell, LayoutDashboard, Map, FileText } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
 import { fetchRolesByUserId } from "../data/usermanage/responsibility"
+import Logo from "./Logo"
 
 interface FooterProps {
   version?: string
@@ -41,41 +42,17 @@ const Footer: React.FC<FooterProps> = ({ version = "v2.4.1" }) => {
   ]
 
   return (
-    <footer className="bg-gradient-to-b from-gray-800 to-gray-900 border-t border-gray-700 text-gray-300 py-6 px-4">
+    <footer className="border-t border-cyan-200/10 bg-[#06131f] px-4 py-6 text-slate-300">
       <div className="w-full max-w-[1400px] mx-auto">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row md:justify-between gap-8 flex-wrap break-words w-full">
           {/* Company Info */}
           <div className="flex flex-col max-w-full md:max-w-md">
             <div className="flex items-center mb-3">
-              <div className="h-12 w-12 rounded-lg bg-[#d5233b] flex items-center justify-center text-white shadow-lg mr-3 border border-[#d5233b]">
-                <div className="flex-shrink-0 bg-white rounded-md p-1.5 shadow-md">
-                  {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M10 17h4V5H2v12h3m15-5 5-5v12h-5" />
-                  <path d="M7 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                  <path d="M17 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                </svg> */}
-                  {/* <img src={Logo} alt="Logo" className="w-5 h-5" /> */}
-                  <Truck size={24} className="text-[#d5233b]" />
-                </div>
-              </div>
-              <div>
-                <h3 className="font-bold text-white text-xl tracking-tight">M-GPS</h3>
-                <p className="text-sm text-white-300">Vehicle Tracking Portal</p>
-              </div>
+              <Logo size="small" />
             </div>
             <p className="text-sm text-gray-400 leading-relaxed ml-1 hidden md:block">
-              GPS tracking solution for real-time vehicle monitoring and fleet management.
+              Integrated polar expedition logistics, asset readiness and emergency coordination.
             </p>
           </div>
 
@@ -116,9 +93,9 @@ const Footer: React.FC<FooterProps> = ({ version = "v2.4.1" }) => {
             </div>
           </div>
 
-          {/* Right: © M-GPS | Privacy | Terms */}
+          {/* Right: POLARIS identity */}
           <div className="flex flex-wrap items-center gap-3 min-w-0 text-gray-400">
-            <div className="whitespace-nowrap">© {currentYear} M-GPS</div>
+            <div className="whitespace-nowrap">© {currentYear} POLARIS · MoES × NCPOR</div>
             <div className="hidden sm:block h-3 w-px bg-gray-600" />
               <span>Need help?</span>
           </div>

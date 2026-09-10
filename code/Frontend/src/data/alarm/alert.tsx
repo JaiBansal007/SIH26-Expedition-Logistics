@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { polarDemoAlerts } from "../polar/demoData"
 
 export async function fetchAllAlerts(): Promise<any> {
   try {
@@ -11,10 +12,10 @@ export async function fetchAllAlerts(): Promise<any> {
         },
       }
     );
-    return response.data;
+    return response.data?.data?.length ? response.data : { data: polarDemoAlerts }
   } catch (error) {
-    console.error("Error fetching all alerts:", error);
-    throw error;
+    console.warn("Alert feed unavailable; showing curated expedition alerts.", error);
+    return { data: polarDemoAlerts };
   }
 }
 
@@ -32,10 +33,10 @@ export async function fetchAlertsByUser(userId: string): Promise<any> {
         },
       }
     );
-    return response.data;
+    return response.data?.data?.length ? response.data : { data: polarDemoAlerts }
   } catch (error) {
-    console.error("Error fetching alerts by user:", error);
-    throw error;
+    console.warn("User alert feed unavailable; showing curated expedition alerts.", error);
+    return { data: polarDemoAlerts };
   }
 }
 

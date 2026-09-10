@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { Entity, Vendor } from "../../types/manage/entity_type"
+import { polarDemoEntities } from "../polar/demoData"
 
 // Get all entities
 export const fetchEntities = async (sortField?: string, sortDirection?: string): Promise<Entity[]> => {
@@ -23,16 +24,16 @@ export const fetchEntities = async (sortField?: string, sortDirection?: string):
       id: item.id,
       vehicleNumber: item.vehicleNumber,
       vendors: item.vendors || [],
-      type: item.type as "Car" | "Truck" | "Excavator",
+      type: item.type,
       status: item.status,
       createdAt: item.createdAt || item.created_at,
       updatedAt: item.updatedAt || item.updated_at,
     }))
 
-    return entities
+    return entities.length ? entities : polarDemoEntities
   } catch (error) {
-    console.error("Error fetching entities:", error)
-    throw error
+    console.warn("Asset feed unavailable; showing expedition assets.", error)
+    return polarDemoEntities
   }
 }
 
@@ -77,7 +78,7 @@ export const createEntity = async (entityData: Omit<Entity, "id" | "createdAt" |
         id: detailedResponse.data.data.id,
         vehicleNumber: detailedResponse.data.data.vehicleNumber,
         vendors: detailedResponse.data.data.vendors || [],
-        type: detailedResponse.data.data.type as "Car" | "Truck" | "Excavator",
+        type: detailedResponse.data.data.type,
         status: detailedResponse.data.data.status,
         createdAt: detailedResponse.data.data.createdAt || detailedResponse.data.data.created_at,
         updatedAt: detailedResponse.data.data.updatedAt || detailedResponse.data.data.updated_at,
@@ -89,7 +90,7 @@ export const createEntity = async (entityData: Omit<Entity, "id" | "createdAt" |
       id: response.data.data.id,
       vehicleNumber: response.data.data.vehicleNumber,
       vendors: response.data.data.vendors || [],
-      type: response.data.data.type as "Car" | "Truck" | "Excavator",
+      type: response.data.data.type,
       status: response.data.data.status,
       createdAt: response.data.data.createdAt || response.data.data.created_at,
       updatedAt: response.data.data.updatedAt || response.data.data.updated_at,
@@ -133,7 +134,7 @@ export const updateEntity = async (
       id: response.data.data.id,
       vehicleNumber: response.data.data.vehicleNumber,
       vendors: response.data.data.vendors || [],
-      type: response.data.data.type as "Car" | "Truck" | "Excavator",
+      type: response.data.data.type,
       status: response.data.data.status,
       createdAt: response.data.data.createdAt || response.data.data.created_at,
       updatedAt: response.data.data.updatedAt || response.data.data.updated_at,

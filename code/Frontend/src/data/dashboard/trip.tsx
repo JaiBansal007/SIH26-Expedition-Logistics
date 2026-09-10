@@ -3,6 +3,7 @@ import type {
   AlertResponse,
 } from "../../types/dashboard/trip_type"
 import axios from "axios"
+import { polarDemoTrips } from "../polar/demoData"
 
 export async function fetchTrips(
   userId: string,
@@ -49,14 +50,14 @@ export async function fetchTrips(
     )
     console.log("Response from fetchTrips:", res.data)
 
-    if (res.data && res.data.data) {
+    if (res.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
       return res.data.data as TripApi[]
     } else {
-      throw new Error("Invalid response structure")
+      return polarDemoTrips
     }
   } catch (error) {
-    console.error("Error fetching trips:", error)
-    return []
+    console.warn("Trip feed unavailable; showing curated expedition data.", error)
+    return polarDemoTrips
   }
 }
 

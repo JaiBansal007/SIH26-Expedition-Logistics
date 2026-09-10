@@ -37,10 +37,10 @@ const Logo: React.FC<{ size?: 'small' | 'medium' | 'large' }> = ({ size = 'mediu
     <div className="flex items-center">
       <div 
         ref={logoRef} 
-        className={`relative bg-gradient-to-br from-red-600 to-red-800 dark:from-red-700 dark:to-gray-900 rounded-lg ${sizeClasses[size]} flex items-center justify-center p-1 transition-transform duration-300 ease-in-out`}
+        className={`relative bg-gradient-to-br from-cyan-300 to-sky-700 rounded-lg ${sizeClasses[size]} flex items-center justify-center p-1 transition-transform duration-300 ease-in-out`}
       >
         {/* Animated ping effect */}
-        <span className="absolute w-full h-full rounded-lg bg-red-600 dark:bg-red-800 opacity-75 animate-ping" style={{ animationDuration: '3s' }}></span>
+        <span className="absolute w-full h-full rounded-lg bg-cyan-300 opacity-40 animate-ping" style={{ animationDuration: '3s' }}></span>
         
         {/* Map icon */}
         <Map className="text-white z-10" size={size === 'small' ? 16 : size === 'medium' ? 24 : 32} />
@@ -51,8 +51,8 @@ const Logo: React.FC<{ size?: 'small' | 'medium' | 'large' }> = ({ size = 'mediu
       </div>
       
       <div className={`flex flex-col ${textSizeClasses[size]}`}>
-        <span className="font-bold text-gray-800 dark:text-gray-100">M-GPS</span>
-        <span className="text-xs text-gray-600 dark:text-gray-300">Unified Platform</span>
+        <span className="font-bold text-white">POLARIS</span>
+        <span className="text-xs text-cyan-200">MoES × NCPOR</span>
       </div>
     </div>
   );

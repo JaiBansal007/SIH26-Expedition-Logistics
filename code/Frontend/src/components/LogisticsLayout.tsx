@@ -111,7 +111,7 @@ const LogisticsLayout: React.FC<LayoutProps> = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-[#071521] text-slate-100">
       {loading && <Loader />}
       <Navbar toggleSidebar={toggleSidebar} />
       <div className="flex flex-1 h-screen overflow-hidden">
@@ -124,7 +124,7 @@ const LogisticsLayout: React.FC<LayoutProps> = ({ children }) => {
         {/* Backdrop for mobile */}
         {sidebarOpen && isMobile && (
           <div 
-            className="fixed inset-0 bg-gray-900/50 dark:bg-black/60 z-30" // removed backdrop-blur-sm
+            className="fixed inset-0 bg-[#020b13]/75 z-30"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -136,7 +136,7 @@ const LogisticsLayout: React.FC<LayoutProps> = ({ children }) => {
           isMobile ? (sidebarOpen ? "ml-0" : "ml-0") : "",
           "overflow-hidden"
         )}>
-          <div className="w-full mx-auto p-4 dark:text-gray-200">
+          <div className="w-full mx-auto p-0 text-slate-100">
             {children}
           </div>
           <Footer version="v2.4.1"/>

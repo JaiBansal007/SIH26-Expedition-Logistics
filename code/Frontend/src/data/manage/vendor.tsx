@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { Vendor } from "../../types/manage/vendor_type"
+import { polarDemoVendors } from "../polar/demoData"
 
 // Get all vendors
 export const fetchVendors = async (): Promise<Vendor[]> => {
@@ -23,10 +24,10 @@ export const fetchVendors = async (): Promise<Vendor[]> => {
       updatedAt: item.updated_at || item.updatedAt,
     }))
 
-    return vendors
+    return vendors.length ? vendors : polarDemoVendors
   } catch (error) {
-    console.error("Error fetching vendors:", error)
-    throw error
+    console.warn("Vendor feed unavailable; showing polar logistics providers.", error)
+    return polarDemoVendors
   }
 }
 

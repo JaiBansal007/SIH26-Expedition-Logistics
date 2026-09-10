@@ -33,14 +33,14 @@ export default function TrailMap({
   const stopMarkersRef = useRef<L.Marker[]>([])
   const [mapType, setMapType] = useState<"normal" | "satellite">("normal")
 
-  // Create vehicle icon with heading
+  // Use a polar vessel marker for both ships and tracked field assets.
   const createVehicleIcon = (heading: number) => {
     return L.divIcon({
       className: "custom-vehicle-icon",
       html: `
       <div style="
-        width: 22px;
-        height: 22px;
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
         background-color: rgba(255, 255, 255, 0.7); /* translucent white */
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
@@ -50,21 +50,11 @@ export default function TrailMap({
         position: relative;
       ">
 
-        <svg 
-          width="18" 
-          height="18" 
-          viewBox="0 0 24 24" 
-          style="transform: rotate(${heading}deg);"
-        >
-          <polygon 
-            points="12,2 17,20 12,16 7,20" 
-            fill="#2563eb"
-          />
-        </svg>
+        <span style="font-size:18px;transform:rotate(${heading}deg);display:block">⚓</span>
       </div>
     `,
-      iconSize: [22, 22],
-      iconAnchor: [11, 11],
+      iconSize: [34, 34],
+      iconAnchor: [17, 17],
     });
   };
 

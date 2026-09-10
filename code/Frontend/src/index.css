@@ -150,6 +150,92 @@
   font-variation-settings: "wdth" 100;
 }
 
+.polar-dashboard {
+  position: relative;
+  isolation: isolate;
+  background: #071521;
+}
+
+.polar-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .3;
+  background-image: linear-gradient(rgba(112, 190, 212, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(112, 190, 212, .045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.polar-dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle at 82% 0%, rgba(35, 143, 177, .16), transparent 30%), linear-gradient(180deg, #091b2a 0%, #071521 52%, #06111c 100%);
+}
+
+.polar-panel {
+  border: 1px solid rgba(148, 205, 224, .13);
+  border-radius: .75rem;
+  background: rgba(10, 30, 45, .84);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .12);
+}
+
+.polar-hero {
+  background: linear-gradient(115deg, rgba(13, 49, 67, .94), rgba(10, 30, 45, .86) 62%, rgba(10, 30, 45, .7));
+}
+
+.polar-map {
+  background-color: #071b2a;
+  background-image: radial-gradient(circle at 18% 30%, rgba(57, 163, 190, .18) 0 1px, transparent 2px), radial-gradient(circle at 68% 72%, rgba(57, 163, 190, .14) 0 1px, transparent 2px), linear-gradient(rgba(80, 170, 197, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(80, 170, 197, .05) 1px, transparent 1px);
+  background-size: 110px 90px, 170px 130px, 38px 38px, 38px 38px;
+}
+
+.polar-map-lines {
+  background: radial-gradient(ellipse at center, rgba(25, 116, 160, .2), transparent 66%);
+}
+
+.polar-dashboard-light {
+  background: #eef6f8;
+}
+
+.polar-dashboard-light::before {
+  background: radial-gradient(circle at 82% 0%, rgba(14, 165, 183, .14), transparent 30%), linear-gradient(180deg, #f8fcfd 0%, #edf6f8 52%, #e5f0f3 100%);
+}
+
+.polar-dashboard-light .polar-panel {
+  border-color: rgba(14, 116, 144, .16);
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 12px 28px rgba(35, 84, 100, .08);
+}
+
+.polar-dashboard-light .polar-hero {
+  background: linear-gradient(115deg, #dff5f7, #ffffff 68%);
+}
+
+.polar-dashboard-light .text-white { color: #0f2f3d !important; }
+.polar-dashboard-light .text-slate-100 { color: #163b4b !important; }
+.polar-dashboard-light .text-slate-200 { color: #244d5c !important; }
+.polar-dashboard-light .text-slate-300 { color: #416977 !important; }
+.polar-dashboard-light .text-slate-400 { color: #5c7b86 !important; }
+.polar-dashboard-light .text-slate-500 { color: #6b8992 !important; }
+.polar-dashboard-light .text-slate-600 { color: #78939b !important; }
+.polar-dashboard-light .border-white\/10 { border-color: rgba(14, 116, 144, .14) !important; }
+.polar-dashboard-light .bg-slate-800 { background-color: #cfe5e9 !important; }
+.polar-dashboard-light .bg-slate-900 { background-color: #e7f3f5 !important; }
+
+/* Legacy screens use red utility classes. Keep the whole product on the polar blue palette. */
+[class*="text-red-"] { color: rgb(56 189 248) !important; }
+[class*="bg-red-"] { background-color: rgb(14 116 144 / .18) !important; }
+[class*="border-red-"] { border-color: rgb(34 211 238 / .3) !important; }
+[class*="ring-red-"] { --tw-ring-color: rgb(34 211 238 / .35) !important; }
+[class*="from-red-"] { --tw-gradient-from: #0891b2 var(--tw-gradient-from-position) !important; }
+[class*="via-red-"] { --tw-gradient-via: #0284c7 var(--tw-gradient-via-position) !important; }
+[class*="to-red-"] { --tw-gradient-to: #1d4ed8 var(--tw-gradient-to-position) !important; }
+[class*="from-\[#d5233b\]"] { --tw-gradient-from: #0891b2 var(--tw-gradient-from-position) !important; }
+[class*="to-\[#d5233b\]"] { --tw-gradient-to: #1d4ed8 var(--tw-gradient-to-position) !important; }
+
 @layer base {
   /* Optional Tailwind reset */
   * {

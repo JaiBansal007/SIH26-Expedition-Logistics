@@ -20,37 +20,38 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../componen
 import { useIsMobile } from "@/hooks/use-mobile"
 import { useAuth } from "../context/AuthContext"
 import { fetchRolesByUserId } from "@/data/usermanage/responsibility"
-
+import Logo from "./Logo"
+ 
 // Define navigation items structure with nested items for dropdowns
 const navItems = [
   {
     icon: LayoutDashboard,
-    label: "Dashboard",
+    label: "Mission Control",
     path: "/dashboard",
   },
   {
     icon: Route,
-    label: "Trip Dashboard",
+    label: "Movement Planning",
     path: "/trip-dashboard",
   },
   {
     icon: Truck,
-    label: "All Vehicles",
+    label: "Assets & Vehicles",
     path: "/live/vehicles",
   },
   {
     icon: MapPin,
-    label: "Trail",
+    label: "Movement Trail",
     path: "/trail",
   },
   {
     icon: Bell,
-    label: "Alerts",
+    label: "Emergency Alerts",
     path: "/alarm/Config",
   },
   {
     icon: Map,
-    label: "Geofence",
+    label: "Station Zones",
     path: "/geofence",
     hasChildren: true,
     children: [
@@ -71,7 +72,7 @@ const navItems = [
   },
   {
     icon: FileText,
-    label: "Reports",
+    label: "Operational Reports",
     path: "/reports/report",
     hasChildren: true,
     children: [
@@ -86,7 +87,7 @@ const navItems = [
   // },
   {
     icon: Settings,
-    label: "Manage",
+    label: "Administration",
     path: "/manage",
     hasChildren: true,
     children: [
@@ -199,12 +200,12 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
     .map((item) => {
       if (isAdmin) return item
       // Only show Reports if "report" tab is present
-      if (item.label === "Reports") {
+      if (item.path === "/reports/report") {
         if (!allowedTabs.includes("report")) return null
         return item
       }
       // Handle User Management children
-      if (item.label === "User Management" && item.hasChildren && item.children) {
+      if (item.path === "/user-management" && item.hasChildren && item.children) {
         const filteredChildren = item.children.filter((child) => {
           if (child.label === "Responsibility") return allowedTabs.includes("user_reponsibility")
           if (child.label === "User") return allowedTabs.includes("user_access")
@@ -214,7 +215,7 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
         return { ...item, children: filteredChildren }
       }
       // Handle Geofence children
-      if (item.label === "Geofence" && item.hasChildren && item.children) {
+      if (item.path === "/geofence" && item.hasChildren && item.children) {
         const filteredChildren = item.children.filter((child) => {
           if (child.label === "Config") return allowedTabs.includes("geofence_config")
           if (child.label === "Group") return allowedTabs.includes("geofence_group")
@@ -225,7 +226,7 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
         return { ...item, children: filteredChildren }
       }
       // Handle Manage children
-      if (item.label === "Manage" && item.hasChildren && item.children) {
+      if (item.path === "/manage" && item.hasChildren && item.children) {
         const filteredChildren = item.children.filter((child) => {
           if (child.label === "Vehicle Master") return allowedTabs.includes("entities")
           if (child.label === "Vehicle Groups") return allowedTabs.includes("group")
@@ -237,11 +238,11 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
         return { ...item, children: filteredChildren }
       }
       // Handle single tab items
-      if (item.label === "Dashboard") return allowedTabs.includes("dashboard") ? item : null
-      if (item.label === "Trip Dashboard") return allowedTabs.includes("trip_dashboard") ? item : null
-      if (item.label === "All Vehicles") return allowedTabs.includes("list_map") ? item : null
-      if (item.label === "Trail") return allowedTabs.includes("trail") ? item : null
-      if (item.label === "Alerts") return allowedTabs.includes("alarm") ? item : null
+      if (item.path === "/dashboard") return allowedTabs.includes("dashboard") ? item : null
+      if (item.path === "/trip-dashboard") return allowedTabs.includes("trip_dashboard") ? item : null
+      if (item.path === "/live/vehicles") return allowedTabs.includes("list_map") ? item : null
+      if (item.path === "/trail") return allowedTabs.includes("trail") ? item : null
+      if (item.path === "/alarm/Config") return allowedTabs.includes("alarm") ? item : null
       return item
     })
     .filter(Boolean)
@@ -259,7 +260,7 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
             isExpanded
             ? "w-64"
             : "w-16",
-        "bg-gray-800 dark:bg-gray-900 mt-14 dark:border-r-2", // Use mt-14 (margin-top) to match navbar height instead of pt-16 (padding-top)
+        "bg-[#081c2b] border-r border-cyan-200/10 mt-14",
       )}
       style={{ height: "calc(100vh - 3.5rem)" }} // Use calc to subtract navbar height (3.5rem = 14 / 4)
       onMouseEnter={() => !isMobile && setIsExpanded(true)}
@@ -288,27 +289,11 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
           className={cn(
             "transition-all duration-300 overflow-hidden",
             isExpanded || (isMobile && isOpen)
-              ? "bg-gradient-to-r from-[#d5233b] to-red-800 rounded-lg shadow-lg p-3"
-              : "bg-red-700 rounded-md p-2 flex justify-center",
+              ? "bg-gradient-to-r from-cyan-600 to-blue-800 rounded-lg shadow-lg p-3"
+              : "bg-blue-700 rounded-md p-2 flex justify-center",
           )}
         >
-          {isExpanded || (isMobile && isOpen) ? (
-            <div className="flex items-center">
-              <div className="flex-shrink-0 bg-white rounded-md p-1.5 shadow-md">
-                <Truck size={24} className="text-[#d5233b]" />
-                {/* <img src={Logo} alt="Logo" className="w-8 h-8" /> */}
-              </div>
-              <div className="ml-3">
-                <h2 className="text-white font-bold text-lg leading-tight">M-GPS</h2>
-                <p className="text-red-100 text-xs">Vehicle Tracking Portal</p>
-              </div>
-            </div>
-          ) : (
-            <div className="flex-shrink-0 bg-white rounded-md p-1 shadow-md">
-              <Truck size={16} className="text-[#d5233b]" />
-              {/* <img src={Logo} alt="Logo" className="w-4 h-4" /> */}
-            </div>
-          )}
+          {isExpanded || (isMobile && isOpen) ? <Logo size="small" /> : <Logo size="small" />}
         </div>
       </div>
 
@@ -333,14 +318,14 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
                     <div
                       className={cn(
                         "flex items-center py-2.5 px-3 rounded-md text-white transition-colors duration-200 cursor-pointer",
-                        isItemActive ? "bg-red-600/20 text-white font-medium" : "hover:bg-gray-700 hover:text-white",
+                        isItemActive ? "bg-cyan-400/15 text-white font-medium" : "hover:bg-slate-700 hover:text-white",
                         "focus:outline-none w-full",
                       )}
                     >
                       <div
                         className={cn(
                           "flex items-center justify-center w-6 h-6 rounded-md",
-                          isItemActive ? "text-[#d5233b]" : "text-white",
+                          isItemActive ? "text-cyan-300" : "text-white",
                         )}
                       >
                         <item.icon size={18} />
@@ -368,8 +353,8 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
                           className={cn(
                             "flex items-center py-2 px-3 rounded-md text-sm transition-colors duration-200",
                             isChildActive
-                              ? "bg-red-600/30 text-white font-medium"
-                              : "text-white hover:bg-gray-700 hover:text-white",
+                              ? "bg-cyan-400/20 text-white font-medium"
+                              : "text-white hover:bg-slate-700 hover:text-white",
                             "focus:outline-none w-full",
                           )}
                           onClick={() => isMobile && closeSidebar()}
@@ -393,8 +378,8 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
                   className={cn(
                     "flex items-center py-2.5 px-3 rounded-md text-white transition-colors duration-200",
                     isActive(item.path)
-                      ? "bg-red-600/20 text-white font-medium"
-                      : "hover:bg-gray-700 hover:text-white",
+                      ? "bg-cyan-400/15 text-white font-medium"
+                      : "hover:bg-slate-700 hover:text-white",
                     "focus:outline-none w-full",
                   )}
                   onClick={() => isMobile && closeSidebar()}
@@ -402,7 +387,7 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
                   <div
                     className={cn(
                       "flex items-center justify-center w-6 h-6 rounded-md",
-                      isActive(item.path) ? "text-[#d5233b]" : "text-white",
+                      isActive(item.path) ? "text-cyan-300" : "text-white",
                     )}
                   >
                     <item.icon size={18} />

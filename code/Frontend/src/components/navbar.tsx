@@ -1,7 +1,7 @@
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import Logo from "./Logo"
-import { User, ChevronDown, Menu, LogOut } from "lucide-react"
+import { User, ChevronDown, Menu, LogOut, Bell, CloudSnow, Search } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +21,9 @@ function Navbar({ toggleSidebar }: NavbarProps) {
   const location = useLocation()
   const navigate = useNavigate()
   const { user, logout } = useAuth()
+  const [notificationsOpen, setNotificationsOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
 
   // Generate page title from current path
   const pageTitle = useMemo(() => {
@@ -52,14 +55,14 @@ function Navbar({ toggleSidebar }: NavbarProps) {
   }
 
   return (
-    <nav className="fixed top-0 w-full bg-white dark:bg-gray-900 z-40 border-b shadow-sm">
+    <nav className="fixed top-0 z-40 w-full border-b border-cyan-200/10 bg-[#071521]/95 text-slate-100 shadow-[0_8px_30px_rgba(0,0,0,.22)] backdrop-blur-xl">
       <div className="flex items-center justify-between h-14 px-4">
         {/* Left side - Logo and sidebar toggle */}
         <div className="flex items-center">
           <button
             onClick={toggleSidebar}
             className={cn(
-              "mr-2 p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none",
+              "mr-2 rounded-md p-2 text-slate-400 hover:bg-white/10 hover:text-white focus:outline-none",
               "md:hidden",
             )}
           >
@@ -72,20 +75,26 @@ function Navbar({ toggleSidebar }: NavbarProps) {
             <Logo size="small" />
 
             <div className="ml-5 hidden sm:flex items-center">
-              <div className="font-bold text-xl text-black dark:text-white">{pageTitle}</div>
+              <div><div className="font-semibold tracking-wide text-white">{pageTitle}</div><div className="hidden text-[9px] uppercase tracking-[0.2em] text-cyan-300 lg:block">MoES × NCPOR / POLARIS</div></div>
             </div>
           </div>
         </div>
 
+        <div className="hidden items-center gap-3 lg:flex">
+          <div className="relative"><button onClick={() => setSearchOpen((open) => !open)} className="flex h-9 w-56 items-center gap-2 rounded-lg border border-white/10 bg-white/[.04] px-3 text-left text-xs text-slate-500 hover:border-cyan-300/30 hover:text-slate-300"><Search size={15} /><span>Search operations...</span><span className="ml-auto rounded border border-white/10 px-1.5 py-0.5 text-[9px] text-slate-600">⌘ K</span></button>{searchOpen && <div className="absolute right-0 top-11 z-50 w-72 rounded-lg border border-cyan-200/15 bg-[#0b2435] p-3 shadow-2xl"><input autoFocus value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search cargo, assets, stations..." className="w-full rounded-md border border-white/10 bg-slate-950/70 px-3 py-2 text-xs text-white outline-none focus:border-cyan-300/50" />{searchQuery && <button onClick={() => { setSearchOpen(false); navigate("/reports/report") }} className="mt-2 w-full rounded-md px-2 py-2 text-left text-xs text-cyan-200 hover:bg-white/5">Open operational reports for “{searchQuery}”</button>}</div>}</div>
+          <div className="flex items-center gap-2 rounded-lg border border-cyan-300/15 bg-cyan-300/5 px-3 py-2 text-xs text-slate-300"><CloudSnow size={14} className="text-cyan-300" /> −28°C <span className="h-1.5 w-1.5 rounded-full bg-orange-300" /></div>
+        </div>
+
         {/* Right side - User actions and theme toggle */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <div className="relative"><button aria-label="Open notifications" onClick={() => setNotificationsOpen((open) => !open)} className="relative rounded-lg p-2 text-slate-400 hover:bg-white/10 hover:text-white"><Bell size={17} /><span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-orange-300" /></button>{notificationsOpen && <div className="absolute right-0 top-11 z-50 w-80 rounded-lg border border-cyan-200/15 bg-[#0b2435] p-4 shadow-2xl"><div className="flex items-center justify-between"><span className="text-sm font-semibold text-white">Mission notifications</span><span className="text-[10px] text-cyan-300">04 active</span></div><div className="mt-3 space-y-3 text-xs"><button onClick={() => { setNotificationsOpen(false); navigate("/alarm/Config") }} className="block w-full rounded-md border border-white/10 bg-white/[.03] p-3 text-left text-slate-300 hover:bg-white/[.07]">Medical response acknowledged near Bharati Station</button><button onClick={() => { setNotificationsOpen(false); navigate("/reports/report") }} className="block w-full rounded-md border border-white/10 bg-white/[.03] p-3 text-left text-slate-300 hover:bg-white/[.07]">POL-46-119 weather-related ETA risk detected</button></div></div>}</div>
           {/* Add the dark mode toggle here */}
-          <DayNightToggleButton className="ml-6" /> {/* Adjust size as needed */}
+          <DayNightToggleButton className="ml-1" />
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:outline-none group">
               <div className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/60 transition-all duration-200 ease-out">
                 <div className="relative">
-                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#d5233b] via-red-600 to-red-700 flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white dark:ring-gray-800 transition-all duration-200 group-hover:scale-105 group-hover:shadow-xl">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-cyan-300 via-sky-500 to-blue-700 flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white dark:ring-gray-800 transition-all duration-200 group-hover:scale-105 group-hover:shadow-xl">
                     {user.username.substring(0, 2).toUpperCase()}
                   </div>
                   {user.active && (
@@ -107,14 +116,14 @@ function Navbar({ toggleSidebar }: NavbarProps) {
             <DropdownMenuContent className="w-80 mt-2 mr-2 overflow-hidden animate-in slide-in-from-top-2 fade-in-0 zoom-in-95 duration-200 shadow-2xl border-0 bg-white dark:bg-gray-900 rounded-2xl">
               {/* Enhanced Profile Header with Glassmorphism Effect */}
               <div className="relative">
-                <div className="h-24 bg-gradient-to-br from-[#d5233b] via-red-600 to-red-700 relative rounded-t-2xl">
+                <div className="h-24 bg-gradient-to-br from-cyan-500 via-sky-600 to-blue-800 relative rounded-t-2xl">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-t-2xl"></div>
                 </div>
 
 
                 <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
                   <div>
-                    <div className="h-20 w-20 rounded-3xl bg-gradient-to-br from-[#d5233b] via-red-600 to-red-700 flex items-center justify-center text-white text-2xl font-bold border-4 border-white dark:border-gray-900 shadow-2xl ring-4 ring-gray-100/50 dark:ring-gray-800/50">
+                    <div className="h-20 w-20 rounded-3xl bg-gradient-to-br from-cyan-300 via-sky-500 to-blue-700 flex items-center justify-center text-white text-2xl font-bold border-4 border-white dark:border-gray-900 shadow-2xl ring-4 ring-gray-100/50 dark:ring-gray-800/50">
                       {user.username.substring(0, 2).toUpperCase()}
                     </div>
                     {/* {user.active && (

@@ -17,6 +17,7 @@ import {
   generateTripGpsStatusReport,
   generateTripSummaryReport,
 } from "../../../data/reports/report"
+import { polarDemoDashboardReport } from "../../../data/reports/report"
 import type {
   AlarmReportData,
   TripGpsStatusReportData,
@@ -30,14 +31,14 @@ export function ReportManagementPage() {
     | AlarmReportData[]
     | TripGpsStatusReportData[]
     | TripSummaryReportData[]
-  >([]) // Store original data
+  >(() => polarDemoDashboardReport) // Store original data
   const [filteredReportData, setFilteredReportData] = useState<
     | DashboardReportData[]
     | AllPositionsReportData[]
     | AlarmReportData[]
     | TripGpsStatusReportData[]
     | TripSummaryReportData[]
-  >([]) // Store filtered data
+  >(() => polarDemoDashboardReport) // Store filtered data
   const [searchQuery, setSearchQuery] = useState("")
   const [isDrawerOpen, setIsDrawerOpen] = useState(true) // Auto-open drawer on page load
   const [currentPage, setCurrentPage] = useState(1)

@@ -47,7 +47,7 @@ export function GroupDrawer({ open, onClose, group, onSave }: GroupDrawerProps) 
 
   // Get unique values for filters from entities
   const uniqueStatuses = ["Active", "Inactive"]
-  const uniqueTypes = ["Car", "Truck", "Excavator"]
+  const uniqueTypes = ["Snow Vehicle", "Research Vessel", "Aircraft", "Scientific Equipment", "Truck", "Car"]
 
   // Filtered entities based on search and filters
   const filteredEntities = entities.filter((entity) => {
