@@ -77,7 +77,7 @@ See [DEMO VIDEO](submission/DEMO.md) for the video link.
 
 ## 10. Screenshots / Prototype Photos
 
-See [SCREENSHOTS](assets/screenshots/README.md).
+See [SCREENSHOTS](assets/screenshots).
 
 ## 11. Installation
 
