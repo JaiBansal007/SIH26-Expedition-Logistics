@@ -4,24 +4,24 @@
 ## Team Details
 
 **Team Name:** Tree.io </br>
-**Team ID:** 101449
+**Team ID:** 
 
-**Team Leader:** [@Dhruv](https://github.com/Dhruv-Tuteja)
+**Team Leader:** [@Jai](https://github.com/JaiBansal007)
 
 **Team Members:**
 
-- **MEMBER_1** - 2023UIN3332 - [@Dhruv](https://github.com/Dhruv-Tuteja)
-- **MEMBER_2** - 2023UCS1548 - [@Nayan](https://github.com/NASA12345)
-- **MEMBER_3** - 2023UCA1804 - [@Tushar](https://github.com/TusharSachdeva29)
-- **MEMBER_4** - 2023UCA1869 - [@Jai](https://github.com/JaiBansal007)
+- **MEMBER_1** - 2023UCA1869 - [@Jai](https://github.com/JaiBansal007)
+- **MEMBER_2** - 2023UIN3332 - [@Dhruv](https://github.com/Dhruv-Tuteja)
+- **MEMBER_3** - 2023UCS1548 - [@Nayan](https://github.com/NASA12345)
+- **MEMBER_4** - 2023UCA1804 - [@Tushar](https://github.com/TusharSachdeva29)
 - **MEMBER_5** - 2023UCA1728 - [@Yashaswini](https://github.com/Yashaswini-Sharma)
 - **MEMBER_6** - 2023UCA1600 - [@Rohan](https://github.com/RohanJ26)
 
 ## Project Links
 
-- **SIH Presentation:** [Final SIH Presentation](code/docs/Tree.io-SIH.pptx.pdf)
-- **Video Demonstration:** [Watch Video](https://youtu.be/9bosGLp1mdE)
-- **Source Code:** [GitHub Repository](https://github.com/TusharSachdeva29/sih-25)
+- **SIH Presentation:** 
+- **Video Demonstration:** 
+- **Source Code:** 
 - **Additional Resources:** 
     - **Real-Time Fleet Tracking Systems:** [ResearchGate: Fleet Management with GPS](https://www.researchgate.net/publication/332938511_Confrontation_between_Puyeo_and_Moyongoe_in_the_280s_and_the_East-Puyeo_Problem)
     - **Event Streaming with Apache Kafka:** [Confluent: Kafka in Transportation](https://www.confluent.io/blog/)
@@ -31,10 +31,10 @@
 
 ---
 
-## 💡 Solution: MARG Unified GPS Platform
+## 💡 Solution: Indian Antarctic Expedition 46
 
 
-MARG is a unified GPS platform transforming government logistics with real-time tracking, predictive analytics, and seamless data integration, enabling smarter, more transparent operations. It offers multiple features like:
+The National Polar Operations Center is a unified GPS platform transforming government logistics with real-time tracking, predictive analytics, and seamless data integration, enabling smarter, more transparent operations. It offers multiple features like:
 
 - **Smart Geofence Engine**
 - **Historical Trail Playback**
@@ -48,7 +48,7 @@ MARG is a unified GPS platform transforming government logistics with real-time 
 
 ## 🏗️ Architecture
 
-The following diagram illustrates the high-level architecture of the MARG platform, showing the interaction between frontend, backend, data processing, and storage components:
+The following diagram illustrates the high-level architecture of the National Polar Operations Center, showing the interaction between frontend, backend, data processing, and storage components:
 
 ![MARG Architecture](code/docs/architecture.png)
 
