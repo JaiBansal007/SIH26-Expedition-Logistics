@@ -50,24 +50,24 @@
   --radius: 0.5rem;
 
   /* Light theme variables (minimal use - dark is primary) */
-  --background: #F4F8FB;
+  --background: #edf4f8;
   --foreground: #07111F;
   --card: #FFFFFF;
   --card-foreground: #07111F;
   --popover: #FFFFFF;
   --popover-foreground: #07111F;
-  --primary: #4C8DFF;
+  --primary: #126a88;
   --primary-foreground: #F4F8FB;
   --secondary: #A8B8C7;
   --secondary-foreground: #07111F;
   --muted: #E5E9ED;
   --muted-foreground: #718495;
-  --accent: #54D5FF;
+  --accent: #1687a7;
   --accent-foreground: #07111F;
   --destructive: #F15C5C;
-  --border: #D0D7DD;
-  --input: #E5E9ED;
-  --ring: #54D5FF;
+  --border: #b4c8d3;
+  --input: #d8e6ed;
+  --ring: #1687a7;
   --chart-1: #4C8DFF;
   --chart-2: #42D392;
   --chart-3: #F5B94C;
@@ -81,6 +81,24 @@
   --sidebar-accent-foreground: #F4F8FB;
   --sidebar-border: #1D3448;
   --sidebar-ring: #54D5FF;
+
+  /* Light-mode snow station surfaces */
+  --color-ice-blue: #08637f;
+  --color-blue: #1d4fa3;
+  --color-green: #16845d;
+  --color-amber: #a66b00;
+  --color-red: #c73b4c;
+  --color-purple: #6755bf;
+  --color-bg-base: #edf4f8;
+  --color-bg-raised: #ffffff;
+  --color-bg-panel: #ffffff;
+  --color-bg-elevated: #dceaf0;
+  --color-border: #b4c8d3;
+  --color-border-strong: #7899aa;
+  --color-text-primary: #102433;
+  --color-text-secondary: #476174;
+  --color-text-muted: #6e8797;
+  --color-text-disabled: #9aadb8;
 }
 
 .dark {

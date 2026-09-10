@@ -11,7 +11,10 @@ export default function DayNightToggleButton({ className }: DayNightToggleButton
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
+      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
       onClick={toggleDarkMode}
       className={`
     relative flex items-center justify-between
@@ -30,7 +33,7 @@ export default function DayNightToggleButton({ className }: DayNightToggleButton
     >
       <MoonSun dark={isDarkMode} />
       {isDarkMode ? <Star /> : <Clouds />}
-    </motion.div>
+      </motion.button>
 
   );
 }

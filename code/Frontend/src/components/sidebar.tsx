@@ -26,31 +26,31 @@ import { fetchRolesByUserId } from "@/data/usermanage/responsibility"
 const navItems = [
   {
     icon: LayoutDashboard,
-    label: "Overview",
+    label: "Mission Overview",
     path: "/dashboard",
     section: "Operations",
   },
   {
     icon: Route,
-    label: "Expedition",
+    label: "Expeditions",
     path: "/trip-dashboard",
     section: "Operations",
   },
   {
     icon: Truck,
-    label: "Cargo",
+    label: "Cargo & Inventory",
     path: "/live/vehicles",
     section: "Operations",
   },
   {
     icon: MapPin,
-    label: "Routes",
+    label: "Routes & Waypoints",
     path: "/trail",
     section: "Operations",
   },
   {
     icon: Map,
-    label: "Geofence",
+    label: "Safety Zones",
     path: "/geofence",
     hasChildren: true,
     section: "Operations",
@@ -62,19 +62,19 @@ const navItems = [
   },
   {
     icon: Bell,
-    label: "Alerts",
+    label: "Emergency Response",
     path: "/alarm/config",
     section: "Intelligence",
   },
   {
     icon: FileText,
-    label: "Analytics",
+    label: "Mission Intelligence",
     path: "/reports/report",
     section: "Intelligence",
   },
   {
     icon: Users,
-    label: "Personnel",
+    label: "Personnel Movement",
     path: "/user-management",
     hasChildren: true,
     section: "System",
@@ -85,7 +85,7 @@ const navItems = [
   },
   {
     icon: Settings,
-    label: "Assets",
+    label: "Assets & Stores",
     path: "/manage",
     hasChildren: true,
     section: "System",
@@ -184,11 +184,11 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
   // Filter navItems based on allowedTabs
   const filteredNavItems = navItems
     .map((item) => {
-      if (item.label === "Analytics") {
+      if (item.label === "Mission Intelligence") {
         if (!allowedTabs.includes("report")) return null
         return item
       }
-      if (item.label === "Personnel" && item.hasChildren && item.children) {
+      if (item.label === "Personnel Movement" && item.hasChildren && item.children) {
         const filteredChildren = item.children.filter((child) => {
           if (child.label === "Responsibility") return allowedTabs.includes("user_reponsibility")
           if (child.label === "User") return allowedTabs.includes("user_access")
@@ -197,7 +197,7 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
         if (filteredChildren.length === 0) return null
         return { ...item, children: filteredChildren }
       }
-      if (item.label === "Geofence" && item.hasChildren && item.children) {
+      if (item.label === "Safety Zones" && item.hasChildren && item.children) {
         const filteredChildren = item.children.filter((child) => {
           if (child.label === "Config") return allowedTabs.includes("geofence_config")
           if (child.label === "Group") return allowedTabs.includes("geofence_group")
@@ -207,7 +207,7 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
         if (filteredChildren.length === 0) return null
         return { ...item, children: filteredChildren }
       }
-      if (item.label === "Assets" && item.hasChildren && item.children) {
+      if (item.label === "Assets & Stores" && item.hasChildren && item.children) {
         const filteredChildren = item.children.filter((child) => {
           if (child.label === "Vehicle Master") return allowedTabs.includes("entities")
           if (child.label === "Vehicle Groups") return allowedTabs.includes("group")
@@ -218,11 +218,11 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
         if (filteredChildren.length === 0) return null
         return { ...item, children: filteredChildren }
       }
-      if (item.label === "Overview") return allowedTabs.includes("dashboard") ? item : null
-      if (item.label === "Expedition") return allowedTabs.includes("trip_dashboard") ? item : null
-      if (item.label === "Cargo") return allowedTabs.includes("list_map") ? item : null
-      if (item.label === "Routes") return allowedTabs.includes("trail") ? item : null
-      if (item.label === "Alerts") return allowedTabs.includes("alarm") ? item : null
+      if (item.label === "Mission Overview") return allowedTabs.includes("dashboard") ? item : null
+      if (item.label === "Expeditions") return allowedTabs.includes("trip_dashboard") ? item : null
+      if (item.label === "Cargo & Inventory") return allowedTabs.includes("list_map") ? item : null
+      if (item.label === "Routes & Waypoints") return allowedTabs.includes("trail") ? item : null
+      if (item.label === "Emergency Response") return allowedTabs.includes("alarm") ? item : null
       return item
     })
     .filter(Boolean)
@@ -286,8 +286,8 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
               <Radio size={20} className="text-ice-blue" />
             </div>
             <div>
-              <h2 className="text-text-primary font-bold text-lg tracking-tight">MARG</h2>
-              <p className="text-text-muted text-[11px] uppercase tracking-wider">Mission Control</p>
+              <h2 className="text-text-primary font-bold text-lg tracking-tight">POLARIS</h2>
+              <p className="text-text-muted text-[11px] uppercase tracking-wider">NCPOR Mission Control</p>
             </div>
           </div>
         </div>
