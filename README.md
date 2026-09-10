@@ -69,15 +69,15 @@ Cargo Tracking/
 
 ## 8. Final Presentation
 
-See [submission/PRESENTATION.md](submission/PRESENTATION.md) for the presentation link.
+See [PRESENTATION](submission/PRESENTATION.md) for the presentation link.
 
 ## 9. Demo Video
 
-See [submission/DEMO.md](submission/DEMO.md) for the video link.
+See [DEMO VIDEO](submission/DEMO.md) for the video link.
 
 ## 10. Screenshots / Prototype Photos
 
-See [assets/screenshots/README.md](assets/screenshots/README.md).
+See [SCREENSHOTS](assets/screenshots/README.md).
 
 ## 11. Installation
 
