@@ -33,13 +33,10 @@ app.use(bodyParser.xml({
     explicitArray: false, // Prevents wrapping every value in an array
   }
 }));
-const allowedOrigins = [
-  'http://localhost:5173', // Local dev
-  'http://127.0.0.1:5173', // Local dev via loopback IP
-]
-
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: function (origin: any, callback: any) {
+    callback(null, true);
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 };
