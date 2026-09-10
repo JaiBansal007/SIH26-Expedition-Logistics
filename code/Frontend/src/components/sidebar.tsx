@@ -46,7 +46,7 @@ const navItems = [
   {
     icon: Bell,
     label: "Alerts",
-    path: "/alarm/config",
+    path: "/alarm/Config",
   },
   {
     icon: Map,
@@ -73,11 +73,11 @@ const navItems = [
     icon: FileText,
     label: "Reports",
     path: "/reports/report",
-    //hasChildren: true,
-    // children: [
-    //   { label: "Report", path: "/reports/report" },
-    //   { label: "Schedule", path: "/reports/schedule" },
-    // ],
+    hasChildren: true,
+    children: [
+      { label: "Report", path: "/reports/report" },
+      { label: "Schedule", path: "/reports/schedule" },
+    ],
   },
   // {
   //   icon: Briefcase,
@@ -112,12 +112,13 @@ interface AuthUser {
 }
 
 const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSidebar }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [openMenus, setOpenMenus] = useState<string[]>([])
+  const [isExpanded, setIsExpanded] = useState(true)
+  const [openMenus, setOpenMenus] = useState<string[]>(["Geofence", "User Management", "Reports", "Manage"])
   const isMobile = useIsMobile()
   const location = useLocation()
 
   const { user } = useAuth() as { user: AuthUser | null }
+  const isAdmin = user?.roles === "Admin"
   // New: Store allowed tabs and reports for this user
   const [allowedTabs, setAllowedTabs] = useState<string[]>([])
   const [accessChecked, setAccessChecked] = useState(false)
@@ -193,9 +194,10 @@ const LogisticsSidebar: React.FC<LogisticsSidebarProps> = ({ isOpen, closeSideba
     return null
   }
 
-  // Filter navItems based on allowedTabs and allowedReports
+  // Admins can access every page; other users are filtered by role tabs.
   const filteredNavItems = navItems
     .map((item) => {
+      if (isAdmin) return item
       // Only show Reports if "report" tab is present
       if (item.label === "Reports") {
         if (!allowedTabs.includes("report")) return null

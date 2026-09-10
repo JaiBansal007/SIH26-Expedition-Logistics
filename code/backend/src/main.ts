@@ -35,6 +35,7 @@ app.use(bodyParser.xml({
 }));
 const allowedOrigins = [
   'http://localhost:5173', // Local dev
+  'http://127.0.0.1:5173', // Local dev via loopback IP
 ]
 
 const corsOptions = {

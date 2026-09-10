@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": " docker-compose up -d && ts-node-dev --respawn ./src/main.ts",
+    "dev": "ts-node-dev --respawn ./src/main.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",

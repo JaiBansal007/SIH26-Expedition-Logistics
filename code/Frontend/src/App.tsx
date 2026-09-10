@@ -70,7 +70,7 @@ const Appp = () => {
             }
           >
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="/trip-dashboard" element={<TripDashboard />} />
             <Route path="/live/vehicles" element={<LiveList />} />
             <Route path="/trail" element={<Trail />} />

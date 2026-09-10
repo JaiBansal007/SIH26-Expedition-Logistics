@@ -92,7 +92,9 @@ const LogisticsLayout: React.FC<LayoutProps> = ({ children }) => {
   let hasAccess = true;
 
   // Only allow /reports/* routes if "report" tab is present
-  if (
+  if (user.roles === "Admin") {
+    hasAccess = true;
+  } else if (
     pathname.startsWith("/reports/") &&
     !allowedTabs.includes("report")
   ) {

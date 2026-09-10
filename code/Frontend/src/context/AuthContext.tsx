@@ -148,16 +148,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const userData = response.data.data
         setUser(userData)
 
-        // Store token and user data in cookies with httpOnly and secure flags
+        localStorage.setItem("access_token", userData.token)
+
+        // Secure cookies are only valid when the frontend is served over HTTPS.
+        const secureCookies = window.location.protocol === "https:"
         Cookies.set("authToken", userData.token, { 
           expires: 1, // 1 day
-          secure: true, // Only sent over HTTPS
+          secure: secureCookies,
           sameSite: 'strict' // Prevents CSRF
         })
 
         Cookies.set("userData", JSON.stringify(userData), { 
           expires: 1,
-          secure: true,
+          secure: secureCookies,
           sameSite: 'strict'
         })
         
