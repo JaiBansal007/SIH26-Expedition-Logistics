@@ -1,25 +1,24 @@
+import { drizzle } from "drizzle-orm/mysql2";
 import { eq , and, sql ,  gte} from "drizzle-orm";
-import { db } from "../db/connection";
 // import { alarm } from "../db/schema";
 import { gps_schema , alarm , entity , group , group_entity , alarm_alert , alarm_customer_group , alarm_email , alarm_geofence_group , alarm_group , alert , alert_shipment_relation , geofence_group_relation , geofence_table ,  stop , equipment} from "../db/schema";
 import { sendAlertEmail } from "../services/email";
 
+const db = drizzle(process.env.DATABASE_URL!);
+
+
 export async function processContinuousDrivingAlerts() {
   try {
-    // Get all active continuous driving alarms
+    // Get all continuous driving alarms
     const continuousDrivingAlarms = await db
       .select()
       .from(alarm)
       .where(
         and(
-          eq(alarm.alarm_type_id, 3),
+          eq(alarm.alarm_type_id , 3),
           eq(alarm.alarm_status, true)
         )
       );
-
-    if (continuousDrivingAlarms.length === 0) {
-      return { success: true, message: "No continuous driving alarms configured" };
-    }
     
     for (const alarmConfig of continuousDrivingAlarms) {
       // Get threshold in hours from alarm configuration

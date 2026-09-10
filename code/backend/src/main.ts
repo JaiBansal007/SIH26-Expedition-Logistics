@@ -22,7 +22,7 @@ import bodyParser from 'body-parser';
 import bodyParserXml from 'body-parser-xml';
 import reportRouter from './routes/report';
 import alarmReportRouter from './routes/alarmReport';
-
+import { insertdumpdata } from './controller/Dump';
 bodyParserXml(bodyParser);
 
 const app = express()
@@ -80,6 +80,7 @@ app.listen(port,async () => {
   console.log(`Example app listening on port ${port}`)
   try {
     console.log("Server started successfully");
+    await insertdumpdata();
     await GPSConsumer();
     await GPSProducer();
   }

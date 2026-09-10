@@ -1,9 +1,11 @@
+import { drizzle } from "drizzle-orm/mysql2";
 import express, { Request, Response } from 'express';
 import { geofencegroup, usertype, group as vehicleGroup } from "../db/schema";
 import { insertGpsData } from "../controller/Gpsfetcher";
-import { db } from "../db/connection";
+const db=drizzle(process.env.DATABASE_URL!);
 
 const featureRouter = express.Router();
+
 featureRouter.get('/usertype', async (req, res) => {
     try {
         const features = await db.select().from(usertype);

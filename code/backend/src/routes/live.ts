@@ -7,7 +7,7 @@ liveRouter.post('/live/:id', async (req, res) => {
     const userId = req.params.id;
     const {groups}= req.body;
     console.log('Fetching live data for user ID:', userId);
-    const data = await getLiveData(Number(userId),groups);
+    const data = await getLiveData(userId,groups);
 
     res.send({ message: data });
 });

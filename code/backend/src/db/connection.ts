@@ -1,15 +1,20 @@
-import { drizzle } from 'drizzle-orm/mysql2';
-import mysql from 'mysql2/promise';
-import * as schema from './schema';
-import 'dotenv/config';
+import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 
-const dbConfig = process.env.DATABASE_URL ? process.env.DATABASE_URL : {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-};
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  queueLimit: 0,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0,
+  // Use the connection string directly if DATABASE_URL is set
+  ...(process.env.DATABASE_URL
+    ? { uri: process.env.DATABASE_URL }
+    : {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+      }),
+});
 
-export const pool = mysql.createPool(dbConfig as any);
-
-export const db = drizzle(pool, { schema, mode: 'default' });
+export const db = drizzle(pool);

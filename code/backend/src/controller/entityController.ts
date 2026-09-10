@@ -1,21 +1,24 @@
 import {Request , Response} from 'express';
+import { drizzle } from "drizzle-orm/mysql2";
 import { eq, inArray , sql , and } from 'drizzle-orm';
 import {entity , entity_vendor , vendor} from '../db/schema';
-import { db } from "../db/connection";
+const db = drizzle(process.env.DATABASE_URL!);
 
-//working
+// working
+
 export async function createEntity(req: Request, res: Response) {
-    try {
+    
+    try {    
         const { vehicleNumber, type, status, vendorIds } = req.body;
-
+        
         // Validate required fields
-        if (!vehicleNumber || !vendorIds || !Array.isArray(vendorIds)) {
-            return res.status(400).json({
-                success: false,
-                message: 'vehicleNumber and vendorIds array are required'
+        if (!vehicleNumber || !type || status === undefined || !vendorIds || !Array.isArray(vendorIds)) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Missing required fields. vehicleNumber, type, status, and vendorIds array are required' 
             });
         }
-
+        
         // Check if vendors exist
         const existingVendors = await db.select()
             .from(vendor)

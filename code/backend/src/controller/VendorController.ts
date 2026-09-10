@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
+import { drizzle } from "drizzle-orm/mysql2";
 import { eq, like, or, and, not, sql } from 'drizzle-orm';
 import { vendor, entity_vendor } from '../db/schema';
-import { db } from "../db/connection";
+
+const db = drizzle(process.env.DATABASE_URL!);
 
 //working
 export async function createVendor(req: Request, res: Response) {

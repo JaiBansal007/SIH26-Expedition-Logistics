@@ -1,14 +1,17 @@
 // consumer.js
 import { Kafka, EachMessagePayload } from 'kafkajs';
+import { drizzle } from 'drizzle-orm/mysql2';
 import 'dotenv/config';
 import { insertGpsData } from '../../controller/Gpsfetcher'; // adjust path if needed
 import { processAllAlerts } from '../../Alerts_types/alertProcessor'; // Import alert processor
-import { db } from "../../db/connection";
+
+const db = drizzle(process.env.DATABASE_URL!);
 
 const kafka = new Kafka({
-  clientId: 'gps-consumer',
-  brokers: [process.env.KAFKA_BROKER || 'localhost:9092']
+  clientId: 'api-consumer',
+  brokers: ([process.env.KAFKA_BROKERS!||""])
 });
+
 const consumer = kafka.consumer({ groupId: 'api-group' });
 const topic = process.env.KAFKA_TOPIC!;
 

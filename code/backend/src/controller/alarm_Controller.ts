@@ -1,17 +1,19 @@
 // crud for alarm management
 
 import { Request, Response } from "express";
-import { db } from "../db/connection";
 
 import {
-  alarm,
-  alarm_phoneNumber,
-  alarm_email,
+  alarm, 
+  alarm_phoneNumber, 
+  alarm_email, 
   alarm_group,
   alarm_geofence_group,
   alarm_customer_group
 } from "../db/schema";
 import { eq, and, or } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/mysql2";
+
+const db = drizzle(process.env.DATABASE_URL!);
 
 // Get all alarms
 export const getAllAlarms = async (req: Request, res: Response) => {

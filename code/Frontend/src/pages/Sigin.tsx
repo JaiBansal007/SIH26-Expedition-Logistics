@@ -50,23 +50,23 @@ const SignIn: React.FC = () => {
   const features = [
     {
       icon: MapPin,
-      title: "Live Expedition Picture",
-      description: "Track polar convoys, field teams and critical assets across remote terrain in real time.",
+      title: "Real-time GPS Tracking",
+      description: "Monitor precise location data with advanced GPS technology and live updates.",
     },
     {
       icon: Users,
-      title: "Cargo & Inventory Control",
-      description: "Maintain one operational view of cargo, stores, equipment and resupply movements.",
+      title: "Multi-Device Management",
+      description: "Manage multiple GPS devices and users from a single unified platform.",
     },
     {
       icon: Shield,
-      title: "Safety & Emergency Response",
-      description: "Surface route deviations, delays and emergency signals before they become mission risks.",
+      title: "Geofence Alerts",
+      description: "Set up virtual boundaries and receive instant notifications for security.",
     },
     {
       icon: TrendingUp,
-      title: "Mission Readiness Analytics",
-      description: "Turn field movement and logistics data into decisions for safer expeditions.",
+      title: "GPS Analytics",
+      description: "Detailed location analytics and movement patterns for optimization.",
     },
   ]
 
@@ -101,14 +101,14 @@ const SignIn: React.FC = () => {
           {/* Header */}
           <div className="mb-12">
             <h2 className="text-4xl xl:text-5xl font-bold mb-6 leading-tight">
-              Plan, Resupply &
+              Track, Monitor &
               <span className="bg-gradient-to-r from-[#d5233b] to-red-400 bg-clip-text text-transparent">
                 {" "}
-                Explore
+                Navigate
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-lg leading-relaxed">
-              POLARIS is the integrated logistics and asset management system for MoES and NCPOR polar expeditions.
+              Advanced GPS tracking and location management platform with real-time monitoring and analytics.
             </p>
           </div>
 
@@ -140,9 +140,9 @@ const SignIn: React.FC = () => {
         <div className="w-full max-w-md mx-auto md:max-w-lg lg:max-w-xl xl:max-w-md">
           {/* Form Header */}
           <div className="mb-8 text-center xl:text-left">
-            <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-3xl font-bold text-gray-900 mb-2">Welcome to POLARIS</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
             <p className="text-gray-600 text-base md:text-lg xl:text-base">
-              Sign in to access the NCPOR expedition operations centre
+              Sign in to access your GPS tracking portal
             </p>
           </div>
 
@@ -227,7 +227,7 @@ const SignIn: React.FC = () => {
               ) : (
                 <MapPin className="w-5 h-5 mr-2" />
               )}
-              {isLoading ? "Authenticating..." : "Enter Mission Control"}
+              {isLoading ? "Signing In..." : "Sign In to Portal"}
             </button>
           </form>
 
@@ -244,9 +244,9 @@ const SignIn: React.FC = () => {
                 </svg>
               </div>
               <div>
-                  <h4 className="text-sm md:text-base xl:text-sm font-medium text-red-900 mb-1">Access support</h4>
+                <h4 className="text-sm md:text-base xl:text-sm font-medium text-red-900 mb-1">Need Help?</h4>
                 <p className="text-sm md:text-base xl:text-sm text-red-700 leading-relaxed">
-                  Contact your expedition coordinator or NCPOR system administrator for access assistance.
+                  Contact your GPS administrator or our support team for assistance with access.
                 </p>
               </div>
             </div>

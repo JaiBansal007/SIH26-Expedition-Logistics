@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { drizzle } from "drizzle-orm/mysql2";
 import {
   usersTable,
   role,
@@ -572,62 +573,51 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
-    // Validate input
-    if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required" });
-    }
-
-    // Find user by username or email
-    const users = await db
+    // Find user by username
+    const user = await db
       .select()
       .from(usersTable)
       .where(
         or(
           eq(usersTable.username, username),
-          eq(usersTable.email, username)
+          eq(usersTable.email, username) // Allow login with email as well
         )
       );
 
-    if (users.length === 0) {
-      return res.status(401).json({ message: "Invalid credentials" });
+    if (user.length === 0) {
+      return 0;
     }
-
-    const user = users[0];
-
-    // Check if user is active
-    if (user.active === false) {
-      return res.status(403).json({ message: "User is inactive" });
+    if (user[0].active === false) {
+      return 10;
     }
 
     // Compare password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user[0].password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return 0;
     }
-
-    // Build user data response
+    // return 1;
     const data = {
-      id: user.id,
-      name: user.name,
+      id: user[0].id,
+      name: user[0].name,
       token: "",
-      phone: user.phone,
-      username: user.username,
-      email: user.email,
-      active: user.active,
+      phone: user[0].phone,
+      username: user[0].username,
+      email: user[0].email,
+      active: user[0].active,
       roles: "",
-      tag: user.tag,
+      tag: user[0].tag,
       usertypes: [] as string[],
       vehiclegrp: [] as string[],
       geofencegrp: [] as string[],
       customergrp: [] as string[],
     };
-
     // Get user's role
     const userRole = await db
       .select()
       .from(user_role)
-      .where(eq(user_role.user_id, user.id));
+      .where(eq(user_role.user_id, user[0].id));
     const roleId = userRole.length > 0 ? userRole[0].role_id : null;
 
     if (roleId) {
@@ -635,11 +625,17 @@ export const loginUser = async (req: Request, res: Response) => {
       data.roles = roleData.length > 0 ? roleData[0].role_name : "";
     }
 
+    // Get user's tag
+    // const userTag = await db.select().from(user_usertag).where(eq(user_usertag.user_id, user[0].id));
+    // if (userTag.length > 0 && userTag[0].user_tag_id !== null && userTag[0].user_tag_id !== undefined) {
+    //   const tagData = await db.select().from(usertag).where(eq(usertag.id, userTag[0].user_tag_id as number));
+    //   data.tag = tagData.length > 0 ? tagData[0].user_tag : '';
+    // }
     // Get user's usertypes
     const userTypes = await db
       .select()
       .from(user_usertype)
-      .where(eq(user_usertype.user_id, user.id));
+      .where(eq(user_usertype.user_id, user[0].id));
     if (userTypes.length > 0) {
       for (const userType of userTypes) {
         const typeData = await db
@@ -651,12 +647,11 @@ export const loginUser = async (req: Request, res: Response) => {
         }
       }
     }
-
     // Get user's vehicle groups
     const vehicleGroups = await db
       .select()
       .from(user_vehicle_group)
-      .where(eq(user_vehicle_group.user_id, user.id));
+      .where(eq(user_vehicle_group.user_id, user[0].id));
     if (vehicleGroups.length > 0) {
       for (const vehicleGroup of vehicleGroups) {
         const groupData = await db
@@ -668,12 +663,11 @@ export const loginUser = async (req: Request, res: Response) => {
         }
       }
     }
-
     // Get user's geofence groups
     const geofenceGroups = await db
       .select()
       .from(user_geofence_group)
-      .where(eq(user_geofence_group.user_id, user.id));
+      .where(eq(user_geofence_group.user_id, user[0].id));
     if (geofenceGroups.length > 0) {
       for (const geofenceGroup of geofenceGroups) {
         const groupData = await db
@@ -687,12 +681,10 @@ export const loginUser = async (req: Request, res: Response) => {
         }
       }
     }
-
-    // Get user's customer groups
     const custgrp = await db
       .select()
       .from(user_customer_group)
-      .where(eq(user_customer_group.user_id, user.id));
+      .where(eq(user_customer_group.user_id, user[0].id));
     if (custgrp.length > 0) {
       for (const cu of custgrp) {
         if (
@@ -710,25 +702,18 @@ export const loginUser = async (req: Request, res: Response) => {
       }
     }
 
-    // Generate JWT token
+    // // Generate JWT token
     const token = jwt.sign(
-      { id: user.id, username: user.username, role: roleId },
+      { id: user[0].id, username: user[0].username, role: roleId },
       process.env.JWT_SECRET!,
       { expiresIn: "1d" }
     );
 
     data.token = token;
-
-    return res.status(200).json({
-      message: "User logged in successfully",
-      data
-    });
+    return data;
   } catch (error) {
     console.error("Error during login:", error);
-    return res.status(500).json({
-      message: "Login failed",
-      error: error instanceof Error ? error.message : String(error)
-    });
+    res.status(500).json({ message: "Login failed" });
   }
 };
 

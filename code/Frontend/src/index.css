@@ -45,119 +45,75 @@
 }
 
 :root {
-  /* Polar Expedition Mission Control - Light Theme (fallback) */
-  --palette-primary-main: #54D5FF;
-  --radius: 0.5rem;
-
-  /* Light theme variables (minimal use - dark is primary) */
-  --background: #edf4f8;
-  --foreground: #07111F;
-  --card: #FFFFFF;
-  --card-foreground: #07111F;
-  --popover: #FFFFFF;
-  --popover-foreground: #07111F;
-  --primary: #126a88;
-  --primary-foreground: #F4F8FB;
-  --secondary: #A8B8C7;
-  --secondary-foreground: #07111F;
-  --muted: #E5E9ED;
-  --muted-foreground: #718495;
-  --accent: #1687a7;
-  --accent-foreground: #07111F;
-  --destructive: #F15C5C;
-  --border: #b4c8d3;
-  --input: #d8e6ed;
-  --ring: #1687a7;
-  --chart-1: #4C8DFF;
-  --chart-2: #42D392;
-  --chart-3: #F5B94C;
-  --chart-4: #9A8CFF;
-  --chart-5: #54D5FF;
-  --sidebar: #0B1726;
-  --sidebar-foreground: #F4F8FB;
-  --sidebar-primary: #54D5FF;
-  --sidebar-primary-foreground: #07111F;
-  --sidebar-accent: #14263A;
-  --sidebar-accent-foreground: #F4F8FB;
-  --sidebar-border: #1D3448;
-  --sidebar-ring: #54D5FF;
-
-  /* Light-mode snow station surfaces */
-  --color-ice-blue: #08637f;
-  --color-blue: #1d4fa3;
-  --color-green: #16845d;
-  --color-amber: #a66b00;
-  --color-red: #c73b4c;
-  --color-purple: #6755bf;
-  --color-bg-base: #edf4f8;
-  --color-bg-raised: #ffffff;
-  --color-bg-panel: #ffffff;
-  --color-bg-elevated: #dceaf0;
-  --color-border: #b4c8d3;
-  --color-border-strong: #7899aa;
-  --color-text-primary: #102433;
-  --color-text-secondary: #476174;
-  --color-text-muted: #6e8797;
-  --color-text-disabled: #9aadb8;
+  /* Light theme variables */
+  --palette-primary-main: #d5233b;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.13 0.028 261.692);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.028 261.692);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.028 261.692);
+  --primary: oklch(0.21 0.034 264.665);
+  --primary-foreground: oklch(0.985 0.002 247.839);
+  --secondary: oklch(0.967 0.003 264.542);
+  --secondary-foreground: oklch(0.21 0.034 264.665);
+  --muted: oklch(0.967 0.003 264.542);
+  --muted-foreground: oklch(0.551 0.027 264.364);
+  --accent: oklch(0.967 0.003 264.542);
+  --accent-foreground: oklch(0.21 0.034 264.665);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.928 0.006 264.531);
+  --input: oklch(0.928 0.006 264.531);
+  --ring: oklch(0.707 0.022 261.325);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0.002 247.839);
+  --sidebar-foreground: oklch(0.13 0.028 261.692);
+  --sidebar-primary: oklch(0.21 0.034 264.665);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.967 0.003 264.542);
+  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
+  --sidebar-border: oklch(0.928 0.006 264.531);
+  --sidebar-ring: oklch(0.707 0.022 261.325);
 }
 
 .dark {
-  /* Polar Expedition Mission Control - Dark Theme (Primary) */
-  --background: #07111F;
-  --foreground: #F4F8FB;
-  --card: #101F30;
-  --card-foreground: #F4F8FB;
-  --popover: #14263A;
-  --popover-foreground: #F4F8FB;
-  --primary: #54D5FF;
-  --primary-foreground: #07111F;
-  --secondary: #A8B8C7;
-  --secondary-foreground: #07111F;
-  --muted: #718495;
-  --muted-foreground: #A8B8C7;
-  --accent: #54D5FF;
-  --accent-foreground: #07111F;
-  --destructive: #F15C5C;
-  --border: #1D3448;
-  --input: #14263A;
-  --ring: #54D5FF;
-  --chart-1: #4C8DFF;
-  --chart-2: #42D392;
-  --chart-3: #F5B94C;
-  --chart-4: #9A8CFF;
-  --chart-5: #54D5FF;
-  --sidebar: #0B1726;
-  --sidebar-foreground: #F4F8FB;
-  --sidebar-primary: #54D5FF;
-  --sidebar-primary-foreground: #07111F;
-  --sidebar-accent: #14263A;
-  --sidebar-accent-foreground: #F4F8FB;
-  --sidebar-border: #1D3448;
-  --sidebar-ring: #54D5FF;
-
-  /* Semantic colors */
-  --color-ice-blue: #54D5FF;
-  --color-blue: #4C8DFF;
-  --color-green: #42D392;
-  --color-amber: #F5B94C;
-  --color-red: #F15C5C;
-  --color-purple: #9A8CFF;
-
-  /* Background levels */
-  --color-bg-base: #07111F;
-  --color-bg-raised: #0B1726;
-  --color-bg-panel: #101F30;
-  --color-bg-elevated: #14263A;
-
-  /* Borders */
-  --color-border: #1D3448;
-  --color-border-strong: #2A465D;
-
-  /* Typography */
-  --color-text-primary: #F4F8FB;
-  --color-text-secondary: #A8B8C7;
-  --color-text-muted: #718495;
-  --color-text-disabled: #526473;
+  /* Dark theme variables */
+  --background: oklch(0.13 0.028 261.692);
+  --foreground: oklch(0.985 0.002 247.839);
+  --card: oklch(0.21 0.034 264.665);
+  --card-foreground: oklch(0.985 0.002 247.839);
+  --popover: oklch(0.21 0.034 264.665);
+  --popover-foreground: oklch(0.985 0.002 247.839);
+  --primary: oklch(0.928 0.006 264.531);
+  --primary-foreground: oklch(0.21 0.034 264.665);
+  --secondary: oklch(0.278 0.033 256.848);
+  --secondary-foreground: oklch(0.985 0.002 247.839);
+  --muted: oklch(0.278 0.033 256.848);
+  --muted-foreground: oklch(0.707 0.022 261.325);
+  --accent: oklch(0.278 0.033 256.848);
+  --accent-foreground: oklch(0.985 0.002 247.839);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.21 0.034 264.665);
+  --sidebar-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.278 0.033 256.848);
+  --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
 @keyframes textShine {
@@ -176,18 +132,22 @@
   animation: textShine 3s ease infinite;
 }
 
-/* Pulse animation for critical indicators */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+/* Dark theme overrides */
+.dark {
+  --color-bg: #111827;
+  --color-text: #f9fafb;
+  --color-muted-text: #9ca3af;
+  --color-card: #1f2937;
+  --color-button: #374151;
+  --color-border: #4b5563;
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.georama {
+  font-family: "Georama", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 @layer base {
@@ -198,55 +158,6 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'tnum' on, 'lnum' on; /* Tabular numerals for numbers */
-  }
-
-  /* Typography - Mission Control Style */
-  h1 {
-    @apply text-3xl font-bold tracking-tight;
-  }
-
-  h2 {
-    @apply text-xl font-semibold tracking-tight;
-  }
-
-  h3 {
-    @apply text-base font-semibold;
-  }
-
-  /* Micro labels - uppercase system metadata */
-  .micro-label {
-    @apply text-[10px] font-semibold uppercase tracking-wider text-muted-foreground;
-  }
-
-  /* KPI numbers - large operational values */
-  .kpi-number {
-    @apply text-4xl font-bold tabular-nums;
-  }
-
-  /* Status dots */
-  .status-dot {
-    @apply inline-block w-2 h-2 rounded-full mr-2;
-  }
-
-  .status-dot-operational {
-    @apply bg-[#42D392];
-  }
-
-  .status-dot-warning {
-    @apply bg-[#F5B94C];
-  }
-
-  .status-dot-critical {
-    @apply bg-[#F15C5C];
-  }
-
-  .status-dot-info {
-    @apply bg-[#4C8DFF];
-  }
-
-  .status-dot-inactive {
-    @apply bg-[#526473];
   }
 
   /*Match any element with overflow-* utilities */
@@ -258,34 +169,30 @@
 
   /* Hide scrollbar by default (WebKit) */
   [class*="overflow-"]::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     display: none;
   }
 
-  /* Show scrollbar on hover - mission control style */
+  /* Show scrollbar on hover */
   [class*="overflow-"]:hover::-webkit-scrollbar {
     display: block;
   }
 
-  /* Scrollbar track */
+  /* Scrollbar track (transparent) */
   [class*="overflow-"]::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  /* Scrollbar thumb - subtle ice blue */
+  /* Scrollbar thumb (light gray + rounded) */
   [class*="overflow-"]::-webkit-scrollbar-thumb {
-    background-color: #1D3448;
-    border-radius: 4px;
-    border: 1px solid transparent;
+    background-color: #e5e7eb; /* Tailwind gray-200 */
+    border-radius: 8px;
+    border: 2px solid transparent;
     background-clip: content-box;
   }
 
-  [class*="overflow-"]::-webkit-scrollbar-thumb:hover {
-    background-color: #2A465D;
-  }
-
-  /* Remove arrow buttons */
+  /* ✅ Remove up/down arrow buttons */
   [class*="overflow-"]::-webkit-scrollbar-button {
     display: none;
     width: 0;
@@ -295,83 +202,9 @@
   /* Firefox hover scrollbars */
   [class*="overflow-"]:hover {
     scrollbar-width: thin;
-    scrollbar-color: #1D3448 transparent;
+    scrollbar-color: #e5e7eb transparent;
   }
 }
 
-/* Mission Control UI Utilities */
-@layer utilities {
-  /* Panel styles */
-  .panel-base {
-    @apply bg-[#101F30] border border-[#1D3448] rounded-lg;
-  }
 
-  .panel-elevated {
-    @apply bg-[#14263A] border border-[#2A465D] rounded-lg;
-  }
 
-  /* Table styles - operations console */
-  .table-operations {
-    @apply w-full;
-  }
-
-  .table-operations thead {
-    @apply border-b border-[#1D3448];
-  }
-
-  .table-operations th {
-    @apply text-left text-[11px] font-semibold uppercase tracking-wider text-[#718495] py-3 px-4;
-  }
-
-  .table-operations td {
-    @apply py-3 px-4 text-sm text-[#F4F8FB] border-t border-[#1D3448];
-  }
-
-  .table-operations tbody tr {
-    @apply transition-colors duration-150;
-  }
-
-  .table-operations tbody tr:hover {
-    @apply bg-[#0B1726];
-  }
-
-  .table-operations tbody tr.selected {
-    @apply bg-[#14263A] border-l-2 border-l-[#54D5FF];
-  }
-
-  /* Button hierarchy */
-  .btn-primary {
-    @apply bg-[#54D5FF] text-[#07111F] hover:bg-[#42B8E0] px-4 py-2 rounded-lg font-medium transition-colors duration-200;
-  }
-
-  .btn-secondary {
-    @apply bg-[#14263A] text-[#F4F8FB] border border-[#1D3448] hover:bg-[#1D3448] px-4 py-2 rounded-lg font-medium transition-colors duration-200;
-  }
-
-  .btn-destructive {
-    @apply bg-transparent text-[#F15C5C] border border-[#F15C5C] hover:bg-[#F15C5C]/10 px-4 py-2 rounded-lg font-medium transition-colors duration-200;
-  }
-
-  /* Input fields */
-  .input-field {
-    @apply bg-[#14263A] border border-[#1D3448] text-[#F4F8FB] px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#54D5FF] focus:border-transparent transition-all duration-200;
-  }
-
-  /* Alert styles */
-  .alert-critical {
-    @apply bg-[#F15C5C]/10 border border-[#F15C5C] text-[#F15C5C] rounded-lg p-4;
-  }
-
-  .alert-warning {
-    @apply bg-[#F5B94C]/10 border border-[#F5B94C] text-[#F5B94C] rounded-lg p-4;
-  }
-
-  .alert-info {
-    @apply bg-[#4C8DFF]/10 border border-[#4C8DFF] text-[#4C8DFF] rounded-lg p-4;
-  }
-
-  /* Card compact */
-  .card-compact {
-    @apply bg-[#101F30] border border-[#1D3448] rounded-lg p-4 space-y-3;
-  }
-}

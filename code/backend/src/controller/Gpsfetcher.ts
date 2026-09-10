@@ -1,9 +1,12 @@
 import 'dotenv/config';
+import { drizzle } from "drizzle-orm/mysql2";
 import { transmission_header, shipment, equipment, stop, customer_lr_detail, gps_schema, vendor, entity, gps_details } from '../db/schema';
 import { eq, inArray, and, desc } from "drizzle-orm";
 import axios from "axios";
-import { db } from "../db/connection";
 
+const db = drizzle(process.env.DATABASE_URL!);
+
+// Helper: Haversine distance in meters
 function haversine(lat1: number, lon1: number, lat2: number, lon2: number) {
   const toRad = (v: number) => (v * Math.PI) / 180;
   const R = 6371000; // meters

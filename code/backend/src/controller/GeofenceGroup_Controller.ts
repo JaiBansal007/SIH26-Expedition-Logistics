@@ -1,21 +1,23 @@
 import { Request, Response } from 'express';
 import { geofencegroup, geofence_group_relation, geofence_table, user_geofence_group } from '../db/schema';
 import { eq, like, and, or, inArray, ne } from 'drizzle-orm';
-import { db } from "../db/connection";
+import { drizzle } from 'drizzle-orm/mysql2';
+
+const db = drizzle(process.env.DATABASE_URL!);
 
 // Create GeoFence Group
 export async function createGeoFenceGroup(req: Request, res: Response) {
     try {
         const { geo_group, geofenceIds } = req.body;
-
+        
         // Validate required fields
         if (!geo_group) {
-            return res.status(400).json({
-                success: false,
-                message: 'Missing required field: geo_group'
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Missing required field: geo_group' 
             });
         }
-
+        
         if (!geofenceIds || !Array.isArray(geofenceIds) || geofenceIds.length === 0) {
             return res.status(400).json({ 
                 success: false, 
@@ -74,7 +76,7 @@ export async function createGeoFenceGroup(req: Request, res: Response) {
                 radius: geofence_table.radius,
                 status: geofence_table.status,
                 address: geofence_table.address, // <-- Add this line
-                time: geofence_table.time
+                time:geofence_table.time|| 1
             })
             .from(geofence_group_relation)
             .innerJoin(geofence_table, eq(geofence_group_relation.geofence_id, geofence_table.id))
@@ -117,7 +119,7 @@ export async function getAllGeoFenceGroups(req: Request, res: Response) {
                         radius: geofence_table.radius,
                         status: geofence_table.status,
                         address: geofence_table.address, // <-- Add this line
-                        time: geofence_table.time
+                        time:geofence_table.time|| 1
                     })
                     .from(geofence_group_relation)
                     .innerJoin(geofence_table, eq(geofence_group_relation.geofence_id, geofence_table.id))
@@ -164,7 +166,7 @@ export async function getGeoFenceGroupById(req: Request, res: Response) {
                 radius: geofence_table.radius,
                 status: geofence_table.status,
                 address: geofence_table.address,
-                time: geofence_table.time
+                time:geofence_table.time|| "1"
             })
             .from(geofence_group_relation)
             .innerJoin(geofence_table, eq(geofence_group_relation.geofence_id, geofence_table.id))
@@ -285,7 +287,7 @@ export async function updateGeoFenceGroup(req: Request, res: Response) {
                 radius: geofence_table.radius,
                 status: geofence_table.status,
                 address: geofence_table.address,
-                time: geofence_table.time
+                time:geofence_table.time // <-- Add this line
             })
             .from(geofence_group_relation)
             .innerJoin(geofence_table, eq(geofence_group_relation.geofence_id, geofence_table.id))
@@ -369,7 +371,7 @@ export async function searchGeoFenceGroups(req: Request, res: Response) {
                         radius: geofence_table.radius,
                         status: geofence_table.status,
                         address: geofence_table.address,
-                        time: geofence_table.time
+                        time:geofence_table.time|| 1
                     })
                     .from(geofence_group_relation)
                     .innerJoin(geofence_table, eq(geofence_group_relation.geofence_id, geofence_table.id))

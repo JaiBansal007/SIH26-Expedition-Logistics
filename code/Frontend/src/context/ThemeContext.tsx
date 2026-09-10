@@ -21,10 +21,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Update local stoEErage and document class when theme changes
   useEffect(() => {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    // Keep both roots in sync. The app shell historically carried `dark` on
-    // body, while Tailwind's dark variant reads the nearest ancestor class.
-    document.documentElement.classList.toggle('dark', isDarkMode);
-    document.body.classList.toggle('dark', isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [isDarkMode]);
 
   // Toggle function

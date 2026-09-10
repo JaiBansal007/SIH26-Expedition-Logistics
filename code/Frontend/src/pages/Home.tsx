@@ -1,10 +1,9 @@
 import React from "react"
-import { Activity, ArrowRight, BarChart3, Bell, Clock, Compass, Package, Route, Satellite, Shield, Snowflake, Truck } from "lucide-react"
+import { ArrowRight, BarChart3, Bell, Clock, Route, Shield, Truck } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "react-router-dom"
 import ill from '../assets/dashboard (4).png'
-import polarRoute from '../assets/polar-route.svg'
 import Logo from "../components/Logo"
 import DayNightToggleButton from "@/components/ui/dark-mode-button"
 
@@ -96,32 +95,23 @@ export default function LandingPage() {
 
       <main className="flex-1 w-full">
         {/* Hero Section */}
-        <section className="relative w-full overflow-hidden py-12 sm:min-h-[600px] lg:py-20 bg-slate-100 dark:bg-[#061525]">
-          <div className="pointer-events-none absolute inset-0 opacity-70">
-            <div className="absolute -right-24 -top-32 h-96 w-96 rounded-full bg-cyan-400/20 blur-3xl" />
-            <div className="absolute left-1/3 top-8 h-48 w-48 rounded-full bg-blue-500/20 blur-3xl" />
-            <div className="absolute bottom-0 left-0 h-48 w-full bg-gradient-to-t from-cyan-300/10 to-transparent" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.65)_0_1px,transparent_1px)] [background-size:42px_42px]" />
-          </div>
+        <section className="w-full py-6 sm:h-150 sm:py-8 lg:py-18 bg-gradient-to-br from-gray-50 via-red-50/30 to-white dark:from-gray-900 dark:via-red-900/10 dark:to-gray-900">
           <div className="w-full px-4 lg:px-6">
             <div className="grid gap-6 lg:gap-12 lg:grid-cols-2 items-center max-w-7xl mx-auto">
               <motion.div
-                className="relative z-10 flex flex-col space-y-4 lg:space-y-6"
+                className="flex flex-col space-y-4 lg:space-y-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
                 <div className="space-y-3">
-                  <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-cyan-700/30 bg-cyan-200/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-900 dark:border-cyan-300/30 dark:bg-cyan-300/10 dark:text-cyan-200">
-                    <Snowflake className="h-3.5 w-3.5" /> MoES · NCPOR / Antarctic operations
-                  </div>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.08]">
-                    Integrated logistics for{" "}
-                    <span className="bg-gradient-to-r from-cyan-200 via-sky-300 to-blue-400 bg-clip-text text-transparent">polar expeditions</span>
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
+                    M-GPS Platform for{" "}
+                    <span className="text-[#d5233b] dark:text-[#ff6b7d]">Logistics Services</span>
                   </h1>
-                  <p className="max-w-xl text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                    POLARIS connects expedition planning, cargo tracking, inventory, personnel movement and emergency
-                    response in one operational picture for MoES and NCPOR.
+                  <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    A single platform to integrate all GPS vendor data, manage vehicles, track trips, and optimize your
+                    logistics operations with enterprise-grade reliability.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -132,7 +122,7 @@ export default function LandingPage() {
                     <Button
                       onClick={() => navigate('/dashboard')}
                       size="lg"
-                      className="px-6 py-2.5 text-base bg-cyan-300 hover:bg-cyan-200 text-[#061525] rounded-lg font-semibold shadow-lg shadow-cyan-500/20 hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
+                      className="px-6 py-2.5 text-base bg-[#d5233b] hover:bg-red-700 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
                     >
                       Get Started <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
@@ -141,7 +131,7 @@ export default function LandingPage() {
                     variant="outline"
                     size="lg"
                     onClick={scrollToSection('features')}
-                    className="px-6 py-2.5 text-base border-slate-400 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-white/60 dark:hover:bg-white/10 hover:text-slate-950 dark:hover:text-white rounded-lg font-medium transition-all duration-200 w-full sm:w-auto"
+                    className="px-6 py-2.5 text-base border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg font-medium transition-all duration-200 w-full sm:w-auto"
                   >
                     Learn More
                   </Button>
@@ -149,18 +139,18 @@ export default function LandingPage() {
               </motion.div>
 
               <motion.div
-                className="relative z-10"
+                className="relative"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="relative mx-auto min-h-[390px] w-full max-w-xl overflow-hidden rounded-3xl border border-cyan-200/20 bg-slate-900/70 p-5 shadow-2xl shadow-cyan-950/50 backdrop-blur-sm dark:bg-slate-900/70 bg-white/80 dark:shadow-cyan-950/50 shadow-slate-300">
-                  <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300"><span className="h-2 w-2 animate-pulse rounded-full bg-emerald-300" /> Systems nominal</div>
-                  <div className="mb-5 flex items-end justify-between pt-10"><div><p className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Active mission</p><h3 className="mt-1 text-2xl font-semibold text-slate-900 dark:text-white">Maitri → Bharati</h3></div><motion.div animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }}><Compass className="h-10 w-10 text-cyan-700 dark:text-cyan-300" /></motion.div></div>
-                  <div className="relative overflow-hidden rounded-2xl border border-slate-300 bg-[#dcecf1] dark:border-white/10 dark:bg-slate-950">
-                    <img src={polarRoute} alt="Antarctic route connecting Maitri Station and Bharati Station" className="block h-auto w-full" />
+                <div className="relative aspect-[4/3] w-full max-w-xl mx-auto overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700">
+                  <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 dark:from-red-900/20 dark:to-gray-800 flex items-center justify-center">
+                    <div className="text-center">
+                      <img src={ill} alt="Dashboard Illustration" className="w-full h-110" />
+
+                    </div>
                   </div>
-                  <div className="mt-5 grid grid-cols-3 gap-3">{[[Satellite,"Tracked assets","128"],[Package,"Cargo in transit","42"],[Activity,"Team status","96%"]].map(([Icon,label,value]) => { const MetricIcon = Icon as typeof Satellite; return <div key={label as string} className="rounded-xl border border-slate-300 bg-slate-100/80 p-3 dark:border-white/10 dark:bg-white/5"><MetricIcon className="mb-2 h-4 w-4 text-cyan-700 dark:text-cyan-300" /><p className="text-lg font-semibold text-slate-900 dark:text-white">{value}</p><p className="text-[10px] uppercase tracking-wider text-slate-600 dark:text-slate-400">{label}</p></div> })}</div>
                 </div>
               </motion.div>
             </div>
@@ -180,13 +170,13 @@ export default function LandingPage() {
               >
                 <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-sm font-medium mb-4">
                   <Shield className="h-3 w-3 mr-2" />
-                  Expedition Operations Platform
+                  Key Features
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                  One mission picture from base camp to field station
+                  Everything You Need in One Platform
                 </h2>
                 <p className="text-base lg:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Coordinate people, supplies and assets across harsh environments with clear ownership, live status and actionable alerts.
+                  Our M-GPS Platform integrates all your GPS vendor data into a single, powerful interface designed for enterprise logistics operations.
                 </p>
               </motion.div>
 
@@ -194,33 +184,33 @@ export default function LandingPage() {
                 {[
                   {
                     icon: Truck,
-                    title: "Expedition Planning",
-                    description: "Coordinate missions, routes, staging points and resupply windows from one workspace."
+                    title: "Vehicle Management",
+                    description: "Track and manage your entire fleet from a single dashboard, regardless of GPS vendor."
                   },
                   {
                     icon: Route,
-                    title: "Cargo & Inventory",
-                    description: "Track consignments, stores and equipment from dispatch through field delivery."
+                    title: "Trip Tracking",
+                    description: "Monitor ongoing trips, view historical data, and analyze route efficiency in real-time."
                   },
                   {
                     icon: Bell,
-                    title: "Emergency Response",
-                    description: "Prioritize distress signals, route deviations, delays and safety-zone breaches."
+                    title: "Alerts & Notifications",
+                    description: "Set up custom alerts for delays, deviations, and other critical operational events."
                   },
                   {
                     icon: BarChart3,
-                    title: "Personnel Movement",
-                    description: "Maintain visibility of teams and movement plans across the expedition network."
+                    title: "Advanced Analytics",
+                    description: "Gain actionable insights from comprehensive dashboards and performance metrics."
                   },
                   {
                     icon: Clock,
-                    title: "Field Visibility",
-                    description: "See live locations, historical trails and mission progress across remote corridors."
+                    title: "ETA Calculation",
+                    description: "Accurate arrival time predictions based on real-time traffic and historical data patterns."
                   },
                   {
                     icon: Shield,
-                    title: "Asset Readiness",
-                    description: "Monitor vehicles, equipment and stores so every deployment is mission-ready."
+                    title: "GPS Performance",
+                    description: "Monitor and optimize the performance of your GPS devices across all vendors."
                   }
                 ].map((feature, index) => (
                   <motion.div

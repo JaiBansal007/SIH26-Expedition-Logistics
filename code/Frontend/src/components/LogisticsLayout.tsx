@@ -109,31 +109,32 @@ const LogisticsLayout: React.FC<LayoutProps> = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-base">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       {loading && <Loader />}
       <Navbar toggleSidebar={toggleSidebar} />
       <div className="flex flex-1 h-screen overflow-hidden">
         {/* Sidebar */}
+        {/* Set z-40 to sidebar so it's above the backdrop */}
         <div className={cn(sidebarOpen && isMobile ? "z-40 fixed inset-y-0 left-0" : "z-40", "relative")}>
           <LogisticsSidebar isOpen={sidebarOpen} closeSidebar={() => setSidebarOpen(false)} />
         </div>
-
+        
         {/* Backdrop for mobile */}
         {sidebarOpen && isMobile && (
-          <div
-            className="fixed inset-0 bg-bg-base/80 backdrop-blur-sm z-30"
+          <div 
+            className="fixed inset-0 bg-gray-900/50 dark:bg-black/60 z-30" // removed backdrop-blur-sm
             onClick={() => setSidebarOpen(false)}
           />
         )}
-
+        
         {/* Main Content */}
         <main className={cn(
           "flex-1 transition-all duration-300 ease-in-out pt-14",
-          "md:ml-16",
+          "md:ml-16", // Always have margin for icon-only sidebar on md+
           isMobile ? (sidebarOpen ? "ml-0" : "ml-0") : "",
           "overflow-hidden"
         )}>
-          <div className="w-full mx-auto p-6 text-text-primary">
+          <div className="w-full mx-auto p-4 dark:text-gray-200">
             {children}
           </div>
           <Footer version="v2.4.1"/>

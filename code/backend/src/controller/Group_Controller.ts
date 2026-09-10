@@ -1,21 +1,22 @@
 import { Request, Response } from 'express';
+import { drizzle } from "drizzle-orm/mysql2";
 import { eq, inArray, sql, and } from 'drizzle-orm';
 import { group, group_entity, entity,user_group } from '../db/schema';
-import { db } from "../db/connection";
+const db = drizzle(process.env.DATABASE_URL!);
 
-//working
+//wkring
 export async function createGroup(req: Request, res: Response) {
     try {
         const { group_name, entityIds } = req.body;
-
+        
         // Validate required fields
         if (!group_name || !entityIds || !Array.isArray(entityIds)) {
-            return res.status(400).json({
-                success: false,
-                message: 'Missing required fields. group_name and entityIds array are required'
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Missing required fields. group_name and entityIds array are required' 
             });
         }
-
+        
         // Check if group name already exists
         const existingGroup = await db.select()
             .from(group)

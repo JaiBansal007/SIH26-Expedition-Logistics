@@ -1,5 +1,4 @@
 import { eq, and, sql, inArray } from 'drizzle-orm';
-import { db } from "../db/connection";
 import { 
   alarm,
   alert,
@@ -17,7 +16,19 @@ import {
 
 } from '../db/schema';
 import { gps_schema } from '../db/schema';
+import { drizzle } from 'drizzle-orm/mysql2';
 import { sendAlertEmail } from '../services/email';
+
+const db = drizzle(process.env.DATABASE_URL!);
+
+/**
+ * Calculate distance between two points using Haversine formula
+ * @param lat1 Latitude of point 1
+ * @param lon1 Longitude of point 1
+ * @param lat2 Latitude of point 2
+ * @param lon2 Longitude of point 2
+ * @returns Distance in meters
+ */
 
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371e3; // Earth radius in meters

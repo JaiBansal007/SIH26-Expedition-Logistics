@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { db } from "../db/connection";
 import { 
   shipment, 
   stop, 
@@ -12,8 +11,18 @@ import {
   gps_details
 } from '../db/schema';
 import { eq, and, between, inArray, sql, desc, asc } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/mysql2';
 
-export interface CommonTripInfo {
+const db = drizzle(process.env.DATABASE_URL!);
+
+interface TripGpsStatusRequest {
+  customer_group_ids: number[];
+  start_date: string; // YYYY-MM-DD format
+  end_date: string;   // YYYY-MM-DD format
+  trip_status: 'active' | 'inactive' | 'all';
+}
+
+interface CommonTripInfo {
   shipment_id: string;
   trip_start_time: string;
   trip_end_time: string;
@@ -22,10 +31,13 @@ export interface CommonTripInfo {
   destination: string;
   service_provider: string;
   gps_vendor: string;
+  consent_status?: string;
+  last_updated_time?: string;
+  operator?: string;
   trip_status: string;
 }
 
-export interface StopInfo {
+interface StopInfo {
   planned_sequence: number;
   actual_sequence: number;
   stop_type: string;
@@ -37,18 +49,23 @@ export interface StopInfo {
   last_ping_vendor: string;
 }
 
-export interface TripGpsStatusResponse {
+interface TripGpsStatusResponse {
   common_info: CommonTripInfo;
   stops_info: StopInfo[];
 }
 
 export class TripGpsStatusReportController {
-  public getTripGpsStatusReport = async (req: Request, res: Response): Promise<void> => {
+  
+  /**
+   * Get Trip GPS Status Report
+   */
+  public async getTripGpsStatusReport(req: Request, res: Response): Promise<void> {
     try {
-      const { start_date, end_date, trip_status, customer_group_ids } = req.body;
+      const { customer_group_ids, start_date, end_date, trip_status }: TripGpsStatusRequest = req.body;
 
+      // Validate required fields
       if (!customer_group_ids || !Array.isArray(customer_group_ids) || customer_group_ids.length === 0) {
-        res.status(400).json({ error: 'customer_group_ids array is required and must not be empty' });
+        res.status(400).json({ error: 'customer_group_ids is required and must be a non-empty array' });
         return;
       }
 
