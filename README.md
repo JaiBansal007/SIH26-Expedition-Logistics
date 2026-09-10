@@ -48,7 +48,7 @@ The National Polar Operations Center is a unified GPS platform transforming gove
 
 ## 6. Architecture
 
-See [docs/architecture.md](docs/architecture.md).
+See [ARCHITECTURE](docs/architecture.md).
 
 ## 7. Repository Structure
 
